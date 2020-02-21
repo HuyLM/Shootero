@@ -7,8 +7,12 @@ public class FollowTarget : MonoBehaviour
     [SerializeField] private Transform target;
     [SerializeField] private float smoothTime;
     [SerializeField] private float maxSpeed;
+    [SerializeField] private float deltaTime;
     [SerializeField] private float maxRangeX;
     [SerializeField] private float maxRangeY;
+
+    private Vector3 lastPositionTarget;
+    private Vector3 curPositionTarget;
 
     private Vector3 velocity = Vector3.zero;
     private Vector3 left, right, top, bottom;
@@ -37,11 +41,13 @@ public class FollowTarget : MonoBehaviour
     // Update is called once per frame
     void LateUpdate()
     {
+        curPositionTarget = target.position;
         Vector3 newPosition = Vector3.SmoothDamp(transform.position, target.position, ref velocity, smoothTime);
         newPosition.z = -10;
         newPosition.x = Mathf.Clamp(newPosition.x, -(maxRangeX - halfPartW), (maxRangeX - halfPartW));
         newPosition.y = Mathf.Clamp(newPosition.y, -(maxRangeY - halfPartH), (maxRangeY - halfPartH));
         transform.position = newPosition;
+        lastPositionTarget = target.position;
     }
 
     void OnDrawGizmosSelected() {

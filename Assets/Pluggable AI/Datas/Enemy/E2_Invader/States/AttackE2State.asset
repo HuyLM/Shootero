@@ -15,14 +15,16 @@ MonoBehaviour:
   nameState: 
   sceneGizmoColor: {r: 1, g: 0, b: 0, a: 1}
   startActions:
-  - {fileID: 11400000, guid: 287f82cb37510c847b566e3ba88db2bb, type: 2}
-  updateActions: []
+  - {fileID: 11400000, guid: 5f21da41a3b0cb94fb1d35aff8773e5b, type: 2}
+  updateActions:
+  - {fileID: 11400000, guid: da2c5c7c956ffed4e82c697a22cd13a3, type: 2}
   endActions: []
   transitions:
   - nameTransition: 
-    decision: {fileID: 11400000, guid: 9a812eead34f5ba41bc5fec7bb85cf51, type: 2}
+    decision: {fileID: 11400000, guid: 46ac29d3cc65d694aa2763f83746630f, type: 2}
     trueState: {fileID: 11400000, guid: 33fba95cf4e63624bb5a04e1e186c5a3, type: 2}
     falseState: {fileID: 11400000, guid: 1b2876dd4004bfb458d52a0a46ff280c, type: 2}
     beforeTransitionActions: []
-    whileTransitionActions: []
+    whileTransitionActions:
+    - {fileID: 11400000, guid: 5638e83708e8dfe4abda6985e109c7f3, type: 2}
     afterTransitionActions: []

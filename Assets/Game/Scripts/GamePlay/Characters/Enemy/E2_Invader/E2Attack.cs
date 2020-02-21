@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class E2Attack : EnemyAttack
 {
-
     private E2Base e2Base;
     public E2Base E2Base
     {
@@ -18,10 +17,31 @@ public class E2Attack : EnemyAttack
         }
     }
     [SerializeField] private Transform target;
-    public override void Attack()
+    [SerializeField] private float aimTime;
+    private float aimCountdown;
+
+    public void StartAimTarget() {
+        aimCountdown = aimTime;
+    }
+
+    public void AttackMove()
     {
-        base.Attack();
-        Debug.Log("e2 attack");
-        E2Base.MoverE2.SetDirectionMove((Vector2)target.position - E2Base.MoverE2.MyRigi.position);
+        E2Base.MoverE2.SetTargetMoveAttack((Vector2)target.position);
+        aimCountdown = aimTime;
+    }
+
+    public bool CanAttackMove() {
+        return aimCountdown < 0;
+    }
+
+    public override void Countdown() {
+        base.Countdown();
+        if(aimCountdown >= 0) {
+            aimCountdown -= Time.deltaTime;
+        }
+    }
+
+    public void AimTarget() {
+        E2Base.MoverE2.LookTarget(target.position);
     }
 }

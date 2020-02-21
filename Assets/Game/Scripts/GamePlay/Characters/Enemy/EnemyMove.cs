@@ -1,24 +1,23 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public abstract class EnemyMove : CharacterMove
 {
     [SerializeField] protected AreaType randomArea;
-    [SerializeField] protected float movingSpeed;
+    [SerializeField] protected float appearMoveSpeed =5;
     protected Vector2 direction;
+    [SerializeField] protected float currentMoveSpeed;
+    [SerializeField] private float speedRotate = 10f;
 
     protected Vector2 GetRandomInArea() {
         return Helper.BorderHelper.GetPoinRandomInArea(randomArea);
     }
 
     public virtual void StartMoveAppear() {
-        Vector2 pointAppear = GetRandomInArea();
 
     }
     public void Move()
     {
-        myRigi.MovePosition(myRigi.position + direction * movingSpeed * Time.deltaTime);
+        myRigi.MovePosition(myRigi.position + direction * currentMoveSpeed * Time.deltaTime);
     }
 
     public virtual bool HasOutBorder()
@@ -36,4 +35,18 @@ public abstract class EnemyMove : CharacterMove
         }
         return false;
     }
+
+    public void SetDirectionMove(Vector2 dir) {
+        this.direction = dir.normalized;
+    }
+
+    public virtual void LookDirection(Vector2 direction) {
+        MyRigi.MoveRotation(Mathf.LerpAngle(MyRigi.rotation, Vector2.SignedAngle(Vector2.up, direction), Time.deltaTime * speedRotate));
+    }
+
+    public virtual void LookTarget(Vector2 target) {
+        LookDirection(target - MyRigi.position);
+    }
+
+   
 }

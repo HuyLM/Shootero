@@ -70,10 +70,10 @@ public abstract class EnemyBase : CharacterBase
         }
     }
 
-
+    Vector2 positionSpawn;
     public void Spawn() {
-        Vector2 positionSpawn = Helper.BorderHelper.GetRandomPositionBorder(spawnBorderType, spawnBorderOffset);
-        MoverEnemy.MyRigi.MovePosition(positionSpawn);
+        positionSpawn = Helper.BorderHelper.GetRandomPositionBorder(spawnBorderType, spawnBorderOffset);
+        transform.position = positionSpawn;
     }
 
     public override void Die() {
@@ -83,4 +83,5 @@ public abstract class EnemyBase : CharacterBase
     public override void Destroy() {
         Debug.Log("destroy");
     }
+
 }

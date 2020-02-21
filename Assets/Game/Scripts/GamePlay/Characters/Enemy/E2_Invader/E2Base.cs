@@ -68,8 +68,4 @@ public class E2Base : EnemyBase
             return takehitterE2;
         }
     }
-    public override void Countdown()
-    {
-
-    }
 }

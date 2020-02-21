@@ -71,7 +71,13 @@ public abstract class CharacterBase : MonoBehaviour {
     }
     #endregion
 
-    public abstract void Countdown();
+    public void Countdown(){
+        AttackerBase.Countdown();
+        MoverBase.Countdown();
+        HealtherBase.Countdown();
+        StaterBase.Countdown();
+        TakeHitterBase.Countdown();
+    }
 
     public abstract void Die();
     public abstract void Destroy();

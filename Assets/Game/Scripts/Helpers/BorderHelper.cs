@@ -99,7 +99,7 @@ namespace Helper {
                 }
             }
 
-            return new Vector2(-w / 2, -h / 2 * value);
+            return new Vector2(-w / 2, h / 2 - h * value);
         }
 
         private static Vector2 GetPointMaxArea() {

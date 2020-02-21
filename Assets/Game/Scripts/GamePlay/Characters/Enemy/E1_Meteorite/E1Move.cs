@@ -5,6 +5,7 @@ public class E1Move : EnemyMove
     [SerializeField] private float rotateSpeed = 1;
     
     public override void StartMoveAppear() {
+        currentMoveSpeed = appearMoveSpeed;
         Vector2 pointAppear = GetRandomInArea();
         direction = (pointAppear - myRigi.position).normalized;
     }

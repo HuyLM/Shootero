@@ -1,0 +1,95 @@
+public static T RandomInList<T>(List<T> list) {
+    if(list == null) {
+        return default(T);
+    }
+    return list[Random.Range(0, list.Count)];
+}
+
+public static int RandomWithPercent(int[] probabilities) { // random trả về index chứa xác suất trúng
+    int randomNumber = UnityEngine.Random.Range(1, 101);
+
+    int currentProbability = 0;
+    for (int i = 0; i < probabilities.Length; ++i) {
+        if(randomNumber < currentProbability + probabilities[i]) {
+            return i;
+            }
+        currentProbability += probabilities[i];
+    }
+    return -1;
+}
+
+void Shuffle<T>(List<T> list) {
+    int n = list.Count;
+    while (n > 1) {
+        int k = random.Next(n);
+        n--;
+        T temp = list[k];
+        list[k] = list[n];
+        list[n] = temp;
+	}
+}
+
+
+vòng đời 1 wave
+B1: Tìm chỉ số Time 
+	Time sẽ random trong khoảng x, y
+B2: Tìm chỉ số Limit
+	Limit sẽ random trong khoảng a, b
+B3: Sinh enemy (1 lượng enemy để đạt Limit)
+	B3.1: Tính độ delay
+		delay = (n/m) * 3 
+			trong đó: 	n là số enemy hiện tại trên màn chơi
+						m là chỉ số Limit
+		Nếu delay vừa tình nhỏ hơn delay hiện tại thì cập nhật lại delay
+	B3.2: Sau khoảng thời gian delay. Đếm số lượng enemy cần sinh(eNeed) là Limit - số lượng e hiện có
+	B3.3: Với mỗi e cần sinh. (Sinh 1 Enemy)
+
+B4: Mỗi khi Enemy mất đi và còn Time. Lặp lại B3
+B5: Khi hết Enemy hoặc Player => End Wave
+
+		
+
+
+Sinh 1 Enemy
+B1: Tìm EnemyID
+	id = RandomInList(ListId)
+B2: Tìm Form Enemy
+	Theo hàm RandomWithPercent(listFormOfCurrentEnemy); 
+B3: Create enemy
+
+
+
+
+
+Mod Generator
+B1: Tạo danh sách các Mod có thể sử dụng
+B2: Với mỗi slot:
+	B2.1: Lọc từ danh sách trên theo Mod Rarity phù hợp với slot
+	B2.2: Chọn Mod: modIndex = RandomInList(listMod)
+B3: Lặp lại B2 đến khi đủ 3 slot
+B4: Trộn vị trí các slot (Shuffle)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

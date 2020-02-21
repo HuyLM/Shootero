@@ -11,6 +11,10 @@ public abstract class CharacterHealth : MonoBehaviour
         get => currentHP;
     }
 
+    public void HPReduce(int hp) {
+        currentHP -= hp;
+    }
+
     public virtual void Countdown() {
 
     }
