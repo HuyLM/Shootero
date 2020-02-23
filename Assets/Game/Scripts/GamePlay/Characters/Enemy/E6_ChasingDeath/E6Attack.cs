@@ -17,10 +17,9 @@ public class E6Attack : EnemyAttack {
     [SerializeField] private float delayAttack;
     [SerializeField] private int numberShot;
     [SerializeField] private float deltaShot;
-    [SerializeField] private FrontBullet bullet;
+    [SerializeField] private HomingBullet bullet;
     [SerializeField] private float speedBullet;
-    [SerializeField] private int numberBullet;
-    [SerializeField] private float spreadAngle;
+    [SerializeField] private float size;
     private bool isAttacking;
 
 
@@ -34,21 +33,11 @@ public class E6Attack : EnemyAttack {
         yield return new WaitForSeconds(delayAttack);
         for (int i = 0; i < numberShot; ++i) {
             Vector2 directionShot = target.position - transform.position;
-            FrontBullet centerBullet = Instantiate(bullet, transform.position, Quaternion.identity);
-            centerBullet.Shoot(speedBullet, directionShot);
-            for (int ibullet = 0; ibullet < numberBullet / 2; ++ibullet) {
-                Vector2 leftDirectionShot = Helper.GamePlayHelper.RotateDirection(directionShot, spreadAngle * (ibullet + 1));
-                FrontBullet leftBullet = Instantiate(bullet, transform.position, Quaternion.identity);
-                leftBullet.Shoot(speedBullet, leftDirectionShot);
-
-                Vector2 rightDirectionShot = Helper.GamePlayHelper.RotateDirection(directionShot, -1 * spreadAngle * (ibullet + 1));
-                FrontBullet rightBullet = Instantiate(bullet, transform.position, Quaternion.identity);
-                rightBullet.Shoot(speedBullet, rightDirectionShot);
-            }
-
+            HomingBullet centerBullet = Instantiate(bullet, transform.position, Quaternion.identity);
+            centerBullet.Shoot(speedBullet, target, directionShot);
+            centerBullet.SetSize(size);
             yield return new WaitForSeconds(deltaShot);
         }
-
         isAttacking = false;
     }
 

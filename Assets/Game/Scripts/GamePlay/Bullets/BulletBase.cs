@@ -23,6 +23,11 @@ public abstract class BulletBase : MonoBehaviour
         this.damage = damage;
     }
 
+    public void SetSize(float size)
+    {
+        transform.localScale = Vector3.one * size;
+    }
+
     protected virtual void OnTriggerEnter2D(Collider2D collision) {
         if (isHitted) {
             return;

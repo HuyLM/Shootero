@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b4d79b9d8b024d248ac740a2dc5f9489, type: 3}
+  m_Name: MoveAttackE4State
+  m_EditorClassIdentifier: 
+  nameState: 
+  sceneGizmoColor: {r: 1, g: 0, b: 0, a: 1}
+  startActions:
+  - {fileID: 11400000, guid: afe05ee1df31af940a78438ed7910fc1, type: 2}
+  - {fileID: 11400000, guid: b9160914c77aa4c4ea708d453942c917, type: 2}
+  updateActions:
+  - {fileID: 11400000, guid: 9ef02c75362570346bb3928873d06172, type: 2}
+  - {fileID: 11400000, guid: 17fee2fe5b8be884eb61b7d510ef0a9c, type: 2}
+  endActions: []
+  transitions:
+  - nameTransition: 
+    decision: {fileID: 11400000, guid: b8098a263712ced4281f9e7a2eb83377, type: 2}
+    trueState: {fileID: 11400000, guid: b0c0f60963e176e4bbe6df99e3289c50, type: 2}
+    falseState: {fileID: 11400000, guid: b0f335aecc1ca0c40bb883e46337be1a, type: 2}
+    beforeTransitionActions: []
+    whileTransitionActions: []
+    afterTransitionActions: []
