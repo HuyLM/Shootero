@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class PlayerMove : MonoBehaviour
+public class PlayerMove : CharacterMove
 {
     private int _touchIndex = -1;
     private Vector3 _targetPosition;
@@ -11,23 +11,19 @@ public class PlayerMove : MonoBehaviour
     private Ray _ray;
     private Plane _xy;
     private float _distance;
-
     private Transform Trans;
  
-    [SerializeField] public float MoveSpeed = 10;
-    [SerializeField] public float MaxMoveSpeed = 50;
+    [SerializeField] public float moveSpeed = 10;
+    [SerializeField] public float moveSpeedMax = 50;
     [SerializeField] private float RangeMoveX = 3;
     [SerializeField] private float RangeMoveY = 5;
     [SerializeField] private int stepMove = 100;
     [SerializeField] private bool move1;
 
-    [SerializeField]
-    private float _screenDpi;
-
     private bool _isDown;
     private Vector3 _oldMousePosition;
+    private bool isTouching;
 
-    private bool _isLock;
     void Awake() {
         Trans = transform;
         _cam = Camera.main;
@@ -35,51 +31,48 @@ public class PlayerMove : MonoBehaviour
         if (Application.platform == RuntimePlatform.Android || Application.platform == RuntimePlatform.IPhonePlayer)
             _touchIndex = 0;
 
-        _screenDpi = Screen.width / 720f;
         RangeMoveX = GamePlayConfig.borderW / 2;
         RangeMoveY = GamePlayConfig.borderH / 2;
     }
 
-    void OnEnable() {
-        _isLock = true;
-
+    public bool CanMoveControl() {
+        GetInput();
+        return isTouching;
     }
 
-    void OnDisable() {
+    public bool HasMoveControlComplete() {
+        GetInput();
+        return !isTouching;
     }
 
-    private void CallOnRevive() {
-        _isLock = false;
-    }
-    private void OnStartAttack() {
-        _isLock = true;
-    }
-
-
-    void Update() {
-        if (!_isLock) return;
-
+    private void GetInput() {
         if (Input.GetMouseButtonDown(0) && !EventSystem.current.IsPointerOverGameObject(_touchIndex)) {
             _oldMousePosition = GetMousePosition();
-            _isDown = true;
-
-            if (!move1) {
-                _targetPosition = Trans.position;
+            if (!isTouching) {
+                isTouching = true;
+                //EventDispatcher.Instance.Dispatch(EventKey.START_INPUT_TOUCH_DOWN);
             }
+            _targetPosition = transform.position;
         } else if (Input.GetMouseButtonUp(0)) {
-            _isDown = false;
-        }
-
-        if (Input.GetMouseButton(0) && _isDown) {
-            var mousePosition = GetMousePosition();
-            MoveSpeed = MaxMoveSpeed;
-
-            if (move1) {
-                _targetPosition = (mousePosition + Vector3.up);
-            } else {
-                _targetPosition += (mousePosition - _oldMousePosition) * MoveSpeed;
+            if (isTouching) {
+                isTouching = false;
+                //EventDispatcher.Instance.Dispatch(EventKey.START_INPUT_TOUCH_UP);
             }
-            // Fix move
+        }
+    }
+
+    public void MoveControl() {
+        if (Input.GetMouseButton(0) && isTouching) {
+            var mousePosition = GetMousePosition();
+            moveSpeed = moveSpeedMax;
+            if (move1) {
+                _targetPosition += (mousePosition - _oldMousePosition) * moveSpeed;
+
+            } else {
+                _targetPosition = mousePosition;
+            }
+            // Fix move            
+
             if (_targetPosition.x > RangeMoveX) {
                 _targetPosition.x = RangeMoveX;
             } else if (_targetPosition.x < -RangeMoveX) {
@@ -91,17 +84,10 @@ public class PlayerMove : MonoBehaviour
             } else if (_targetPosition.y < -RangeMoveY) {
                 _targetPosition.y = -RangeMoveY;
             }
-
-            //var rig = Physics2D.Raycast(Trans.position, (_targetPosition - Trans.position).normalized, 100 * Time.deltaTime);
-            Trans.position = Vector2.MoveTowards(Trans.position, _targetPosition, stepMove * Time.deltaTime);
-            //TODO: Create raycast to check enemy
-
-            //if(rig)
-            //    Debug.Log("hit enemy dont dead");
-
+            transform.position = Vector2.MoveTowards(transform.position, _targetPosition, stepMove * Time.deltaTime);
             _oldMousePosition = mousePosition;
         } else {
-            MoveSpeed = 0;
+            moveSpeed = 0;
         }
     }
 

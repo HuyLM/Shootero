@@ -6,17 +6,24 @@ using UnityEngine;
 public abstract class BulletBase : MonoBehaviour
 {
     [SerializeField] private TargetType[] targetTypes;
+    [SerializeField] protected SpriteRenderer sprite;
     [SerializeField] private GameObject explosion;
     [SerializeField] private ParticleSystem selfExplosion;
     [SerializeField, ColorUsage(true)] private Color selfDestroyColor;
     public Action onDestroy;
 
-    private int damage;
-    private bool isHitted;
+    protected int damage;
+    protected bool isHitted;
 
     protected virtual void OnEnable() {
         isHitted = false;
         GetComponent<Collider2D>().enabled = true;
+    }
+
+    public void SetAlpha(float alpha) {
+        var color = sprite.color;
+        color.a = alpha;
+        sprite.color = color;
     }
 
     public void SetDamage(int damage) {
@@ -29,24 +36,32 @@ public abstract class BulletBase : MonoBehaviour
     }
 
     protected virtual void OnTriggerEnter2D(Collider2D collision) {
-        if (isHitted) {
+        if (IsBlockHit()) {
             return;
         }
         foreach (var target in targetTypes) {
             if (target.ToString().Equals(collision.tag)) {
-                isHitted = true;
-                GetComponent<Collider2D>().enabled = false;
-                CharacterTakeHit victim = collision.GetComponent<CharacterTakeHit>();
-                if (victim != null) {
-                    victim.TakeHitDamege(damage);
-                }
-                DestroyWithEffect();
+                Hit(collision);
                 return;
             }
         }
         if (collision.CompareTag("Destroy") || collision.CompareTag("Finish")) {
             Destroy();
         }
+    }
+
+    protected virtual bool IsBlockHit() {
+        return isHitted;
+    }
+
+    protected virtual void Hit(Collider2D collision) {
+        isHitted = true;
+        GetComponent<Collider2D>().enabled = false;
+        CharacterTakeHit victim = collision.GetComponent<CharacterTakeHit>();
+        if (victim != null) {
+            victim.TakeHitDamege(damage);
+        }
+        DestroyWithEffect();
     }
 
     protected virtual void DestroyWithEffect() {

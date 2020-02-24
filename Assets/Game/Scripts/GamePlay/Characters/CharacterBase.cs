@@ -71,6 +71,18 @@ public abstract class CharacterBase : MonoBehaviour {
     }
     #endregion
 
+    private void Awake() {
+        Initalize();
+    }
+
+    public void Initalize() {
+        AttackerBase.Initalize();
+        MoverBase.Initalize();
+        HealtherBase.Initalize();
+        StaterBase.Initalize();
+        TakeHitterBase.Initalize();
+    }
+
     public void Countdown(){
         AttackerBase.Countdown();
         MoverBase.Countdown();

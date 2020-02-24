@@ -16,6 +16,11 @@ public abstract class CharacterAttack : MonoBehaviour {
             return characterBase;
         }
     }
+
+    public virtual void Initalize() {
+
+    }
+
     public virtual void Countdown() {
 
     }

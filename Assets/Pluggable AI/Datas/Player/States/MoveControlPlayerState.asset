@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db2faf437796433468b32400b3bb08e2, type: 3}
+  m_Name: MoveControlPlayerState
+  m_EditorClassIdentifier: 
+  nameState: 
+  sceneGizmoColor: {r: 0, g: 1, b: 0.09604788, a: 1}
+  startActions: []
+  updateActions:
+  - {fileID: 11400000, guid: 62d023f8f9f5b094ea231d6dc22ed966, type: 2}
+  - {fileID: 11400000, guid: 5102f36da7780d142a7e033f32609511, type: 2}
+  endActions: []
+  transitions:
+  - nameTransition: 
+    decision: {fileID: 11400000, guid: e28657c6d51d7f248804889582791b89, type: 2}
+    trueState: {fileID: 11400000, guid: fecc44dc4e2c0fa40b6dfebb70d59534, type: 2}
+    falseState: {fileID: 11400000, guid: 0b2fe5ccce63d984589f691ad158fbc4, type: 2}
+    beforeTransitionActions: []
+    whileTransitionActions: []
+    afterTransitionActions: []

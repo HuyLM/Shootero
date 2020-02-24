@@ -14,6 +14,10 @@ public abstract class CharacterTakeHit : MonoBehaviour
         }
     }
 
+    public virtual void Initalize() {
+
+    }
+
     public void TakeHitDamege(int damage) {
         CharacterBase.HealtherBase.HPReduce(damage);
     }
