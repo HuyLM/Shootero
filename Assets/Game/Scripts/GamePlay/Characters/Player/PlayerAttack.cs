@@ -30,6 +30,18 @@ public class PlayerAttack : CharacterAttack
         }
     }
 
+    public void UpgradeAttackComponent() {
+        if(currentAttackComponent != null) {
+            currentAttackComponent.Upgrade();
+        }
+    }
+
+    public void FocusUpgradeAttackComponent() {
+        if (currentAttackComponent != null) {
+            currentAttackComponent.FocusUpgrade();
+        }
+    }
+
     public override void Countdown() {
         base.Countdown();
         if (currentAttackComponent != null) {

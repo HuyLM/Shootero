@@ -7,9 +7,14 @@ public class PlayerPiercingGunComponent : PlayerAttackComponent {
     [SerializeField] private float halfDistanceBase = 0.5f;
     [SerializeField] private float distanceUpgradeX = 0.2f;
     [SerializeField] private float distanceUpgradeY = 0.03f;
-
+    [SerializeField] private float reduceDB = 0.1f;
 
     private int numberBullet;
+
+    public override void FocusUpgrade() {
+        halfDistanceBase *= 2.0f / 3;
+    }
+
     public override void Initalize() {
         base.Initalize();
         numberBullet = 2;
@@ -19,6 +24,7 @@ public class PlayerPiercingGunComponent : PlayerAttackComponent {
     public override void Upgrade() {
         base.Upgrade();
         numberBullet += 2;
+        Debug.Log("reduce: " + reduceDB);
     }
 
     protected override void Attacking() {

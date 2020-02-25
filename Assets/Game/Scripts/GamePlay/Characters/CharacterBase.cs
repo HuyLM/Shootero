@@ -69,13 +69,14 @@ public abstract class CharacterBase : MonoBehaviour {
             return takeHitter;
         }
     }
+
     #endregion
 
     private void Awake() {
         Initalize();
     }
 
-    public void Initalize() {
+    public virtual void Initalize() {
         AttackerBase.Initalize();
         MoverBase.Initalize();
         HealtherBase.Initalize();
@@ -83,7 +84,7 @@ public abstract class CharacterBase : MonoBehaviour {
         TakeHitterBase.Initalize();
     }
 
-    public void Countdown(){
+    public virtual void Countdown(){
         AttackerBase.Countdown();
         MoverBase.Countdown();
         HealtherBase.Countdown();

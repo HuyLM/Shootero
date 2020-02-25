@@ -6,9 +6,14 @@ public class PlayerGatlingGunComponent : PlayerAttackComponent {
     [SerializeField] private FrontBullet bullet;
     [SerializeField] private float speedBullet;
     [SerializeField] private float halfSpreadAngle;
-
+    [SerializeField] private float reduceDB = 0.1f;
 
     private int numberBullet;
+
+    public override void FocusUpgrade() {
+        halfSpreadAngle = 6;
+    }
+
     public override void Initalize() {
         base.Initalize();
         numberBullet = 1;
@@ -18,6 +23,7 @@ public class PlayerGatlingGunComponent : PlayerAttackComponent {
     public override void Upgrade() {
         base.Upgrade();
         numberBullet += 1;
+        Debug.Log("reduce: " + reduceDB);
     }
 
     protected override void Attacking() {

@@ -6,7 +6,7 @@ public class FrontBullet : BulletBase {
     [SerializeField] protected Rigidbody2D myRigi;
     [SerializeField] protected bool canPiercing;
     [SerializeField] protected int maxPiercing = 4;
-    [SerializeField] protected float reducePiercingPercent = 0.25f;
+    [SerializeField] protected float reducePiercingPercent = -0.25f;
 
     protected int piercingTime;
     private Vector2 direction;
@@ -49,10 +49,8 @@ public class FrontBullet : BulletBase {
             piercingTime++;
             CharacterTakeHit victim = collision.GetComponent<CharacterTakeHit>();
             if (victim != null) {
-                float dameReduce = damage * (piercingTime - 1) * reducePiercingPercent;
-                int damageTake = (int)(damage - dameReduce);
-                SetAlpha(1 - reducePiercingPercent * (piercingTime - 1));
-                victim.TakeHitDamege(damageTake);
+                Damage.AddModifier(new StatModifier(reducePiercingPercent, StatModType.PercentAdd));
+                victim.TakeHitDamege(Damage.Value);
             }
             if(piercingTime >= maxPiercing) {
                 DestroyWithEffect();
@@ -62,7 +60,7 @@ public class FrontBullet : BulletBase {
             GetComponent<Collider2D>().enabled = false;
             CharacterTakeHit victim = collision.GetComponent<CharacterTakeHit>();
             if (victim != null) {
-                victim.TakeHitDamege(damage);
+                victim.TakeHitDamege(Damage.Value);
             }
             DestroyWithEffect();
         }

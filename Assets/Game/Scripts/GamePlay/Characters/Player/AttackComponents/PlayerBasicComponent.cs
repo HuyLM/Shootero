@@ -6,6 +6,10 @@ public class PlayerBasicComponent : PlayerAttackComponent {
     [SerializeField] private float speedBullet;
 
     private int numberBullet;
+
+    public override void FocusUpgrade() {
+    }
+
     public override void Initalize() {
         base.Initalize();
     }

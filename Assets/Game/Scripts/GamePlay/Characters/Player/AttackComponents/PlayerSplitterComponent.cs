@@ -6,9 +6,14 @@ public class PlayerSplitterComponent : PlayerAttackComponent {
     [SerializeField] private FrontBullet bullet;
     [SerializeField] private float speedBullet;
     [SerializeField] private float spreadAngle;
-
+    [SerializeField] private float reduceDB = 0.1f;
 
     private int numberBullet;
+
+    public override void FocusUpgrade() {
+        spreadAngle = 3;
+    }
+
     public override void Initalize() {
         base.Initalize();
         numberBullet = 3;
@@ -18,6 +23,7 @@ public class PlayerSplitterComponent : PlayerAttackComponent {
     public override void Upgrade() {
         base.Upgrade();
         numberBullet += 2;
+        Debug.Log("reduce: " + reduceDB);
     }
 
     protected override void Attacking() {

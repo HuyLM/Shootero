@@ -6,14 +6,19 @@ using UnityEngine;
 public abstract class BulletBase : MonoBehaviour
 {
     [SerializeField] private TargetType[] targetTypes;
+    [SerializeField] protected float BDPercent; 
     [SerializeField] protected SpriteRenderer sprite;
     [SerializeField] private GameObject explosion;
     [SerializeField] private ParticleSystem selfExplosion;
     [SerializeField, ColorUsage(true)] private Color selfDestroyColor;
     public Action onDestroy;
 
-    protected int damage;
+    protected IntStat damage;
+    protected FloatStat size;
     protected bool isHitted;
+
+    public IntStat Damage { get => damage; }
+    public FloatStat Size { get => size; }
 
     protected virtual void OnEnable() {
         isHitted = false;
@@ -26,13 +31,14 @@ public abstract class BulletBase : MonoBehaviour
         sprite.color = color;
     }
 
-    public void SetDamage(int damage) {
-        this.damage = damage;
+    public void SetDamage(int atk) {
+        damage = new IntStat((int)(atk * BDPercent));
     }
 
     public void SetSize(float size)
     {
-        transform.localScale = Vector3.one * size;
+        this.size.BaseValue = size;
+        transform.localScale = Vector3.one * this.size.Value;
     }
 
     protected virtual void OnTriggerEnter2D(Collider2D collision) {
@@ -59,7 +65,7 @@ public abstract class BulletBase : MonoBehaviour
         GetComponent<Collider2D>().enabled = false;
         CharacterTakeHit victim = collision.GetComponent<CharacterTakeHit>();
         if (victim != null) {
-            victim.TakeHitDamege(damage);
+            victim.TakeHitDamege(Damage.Value);
         }
         DestroyWithEffect();
     }

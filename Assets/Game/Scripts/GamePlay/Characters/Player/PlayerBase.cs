@@ -53,7 +53,28 @@ public class PlayerBase : CharacterBase {
             return takeHitterPlayer;
         }
     }
+
+
+    private PlayerSkill skiller;
+    public PlayerSkill SkillerPlayer {
+        get {
+            if (skiller == null) {
+                skiller = GetComponent<PlayerSkill>();
+            }
+            return skiller;
+        }
+    }
     #endregion
+
+    public override void Initalize() {
+        base.Initalize();
+        SkillerPlayer.Initalize();
+    }
+
+    public override void Countdown() {
+        base.Countdown();
+        SkillerPlayer.Countdown();
+    }
 
     public override void Destroy() {
     }

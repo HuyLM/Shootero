@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public abstract class CharacterStat : MonoBehaviour {
-    [SerializeField] private int maxHP;
-    [SerializeField] private int atk;
+    [SerializeField] private IntStat maxHP;
+    [SerializeField] private IntStat atk;
 
     private CharacterBase characterBase;
     public CharacterBase CharacterBase {
@@ -15,6 +15,9 @@ public abstract class CharacterStat : MonoBehaviour {
             return characterBase;
         }
     }
+
+    public IntStat Atk { get => atk; set => atk = value; }
+    public IntStat MaxHP { get => maxHP; set => maxHP = value; }
 
     public virtual void Initalize() {
 

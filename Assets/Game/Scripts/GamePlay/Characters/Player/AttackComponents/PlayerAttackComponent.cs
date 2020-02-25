@@ -6,11 +6,9 @@ public abstract class PlayerAttackComponent : MonoBehaviour
 {
     [SerializeField] protected Transform firePoint;
     [SerializeField] protected float atkSpeed;
-    [SerializeField] protected int maxLevel;
 
     protected bool isAttacking;
     protected float attackCountdown;
-    protected int currentLevel = 1;
 
     public virtual void Initalize() {
         attackCountdown = FireRate;
@@ -52,11 +50,8 @@ public abstract class PlayerAttackComponent : MonoBehaviour
         }
     }
 
-    public bool CanUpgrade() {
-        return currentLevel < maxLevel;
+    public virtual void Upgrade() {
     }
 
-    public virtual void Upgrade() {
-        currentLevel++;
-    }
+    public abstract void FocusUpgrade();
 }
