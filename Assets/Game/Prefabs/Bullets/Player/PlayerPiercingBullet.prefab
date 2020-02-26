@@ -146,8 +146,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c5d10dfefffb524c95ece79c9c0c04b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetTypes: 
-  sprite: {fileID: 0}
+  targetTypes: 01000000
+  BDPercent: 0
+  sprite: {fileID: 4793134904467596717}
   explosion: {fileID: 0}
   selfExplosion: {fileID: 0}
   selfDestroyColor: {r: 0, g: 0, b: 0, a: 0}

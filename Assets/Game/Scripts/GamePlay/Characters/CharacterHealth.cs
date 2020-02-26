@@ -25,6 +25,10 @@ public abstract class CharacterHealth : MonoBehaviour
         currentHP -= hp;
     }
 
+    public void AddHp(int hp) {
+        currentHP += hp;
+    }
+
     public virtual void Initalize() {
 
     }

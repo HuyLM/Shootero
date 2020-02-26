@@ -66,16 +66,6 @@ public class PlayerBase : CharacterBase {
     }
     #endregion
 
-    public override void Initalize() {
-        base.Initalize();
-        SkillerPlayer.Initalize();
-    }
-
-    public override void Countdown() {
-        base.Countdown();
-        SkillerPlayer.Countdown();
-    }
-
     public override void Destroy() {
     }
 

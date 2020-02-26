@@ -49,8 +49,9 @@ public class FrontBullet : BulletBase {
             piercingTime++;
             CharacterTakeHit victim = collision.GetComponent<CharacterTakeHit>();
             if (victim != null) {
-                Damage.AddModifier(new StatModifier(reducePiercingPercent, StatModType.PercentAdd));
-                victim.TakeHitDamege(Damage.Value);
+                hitInfor.Damage.AddModifier(new StatModifier(reducePiercingPercent, StatModType.PercentAdd));
+                SetAlpha(1 - reducePiercingPercent * piercingTime);
+                victim.TakeHitDamage(hitInfor);
             }
             if(piercingTime >= maxPiercing) {
                 DestroyWithEffect();
@@ -60,7 +61,7 @@ public class FrontBullet : BulletBase {
             GetComponent<Collider2D>().enabled = false;
             CharacterTakeHit victim = collision.GetComponent<CharacterTakeHit>();
             if (victim != null) {
-                victim.TakeHitDamege(Damage.Value);
+                victim.TakeHitDamage(hitInfor);
             }
             DestroyWithEffect();
         }

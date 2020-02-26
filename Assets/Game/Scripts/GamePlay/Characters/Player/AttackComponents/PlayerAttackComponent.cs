@@ -7,18 +7,26 @@ public abstract class PlayerAttackComponent : MonoBehaviour
     [SerializeField] protected Transform firePoint;
     [SerializeField] protected float atkSpeed;
 
+    protected PlayerAttack playerAttack;
     protected bool isAttacking;
     protected float attackCountdown;
+    protected FloatStat playerAtkSpeed;
+
+    public void SetPlayerAttack(PlayerAttack playerAttack) {
+        this.playerAttack = playerAttack;
+    }
 
     public virtual void Initalize() {
-        attackCountdown = FireRate;
         isAttacking = false;
+        playerAtkSpeed = playerAttack.PlayerBase.StaterPlayer.AtkSpeed;
+        playerAtkSpeed.BaseValue = atkSpeed;
+        attackCountdown = FireRate;
 
     }
 
     public float FireRate {
         get {
-            return 1 / atkSpeed;
+            return 1 / playerAtkSpeed.Value;
         }
     }
 
@@ -54,4 +62,16 @@ public abstract class PlayerAttackComponent : MonoBehaviour
     }
 
     public abstract void FocusUpgrade();
+
+    protected virtual T ChangeBullet<T>(T bullet) where T : BulletBase {
+        T bulletChanged;
+
+        bulletChanged = PoolManager.Spawn(bullet);
+        bulletChanged.SetHitInfor(playerAttack.PlayerBase.StaterPlayer.Atk.Value, playerAttack.PlayerBase.SkillerPlayer.EffectAttackMods, playerAttack.PlayerBase);
+        foreach(var mod in  playerAttack.PlayerBase.SkillerPlayer.ChangeBulletMods) {
+            mod.ChangeBullet(bulletChanged.GetComponent<T>());
+        }
+      
+        return bulletChanged;
+    }
 }

@@ -4,6 +4,18 @@ using System;
 [Serializable]
 
 public class FloatStat : Stat<float> {
+    public FloatStat() : base() {
+
+    }
+
+    public FloatStat(float baseValue) : base(baseValue) {
+
+    }
+
+    public FloatStat(Stat<float> stat) : base(stat) {
+
+    }
+
     protected override float CalculateFinalValue() {
         float finalValue = BaseValue;
         float sumPercentAdd = 0;

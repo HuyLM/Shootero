@@ -1,4 +1,6 @@
 ﻿
+
+[System.Serializable]
 public class StatModifier
 {
     public float Value;

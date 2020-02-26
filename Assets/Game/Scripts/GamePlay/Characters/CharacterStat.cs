@@ -16,8 +16,8 @@ public abstract class CharacterStat : MonoBehaviour {
         }
     }
 
-    public IntStat Atk { get => atk; set => atk = value; }
-    public IntStat MaxHP { get => maxHP; set => maxHP = value; }
+    public IntStat Atk { get => atk;}
+    public IntStat MaxHP { get => maxHP; }
 
     public virtual void Initalize() {
 

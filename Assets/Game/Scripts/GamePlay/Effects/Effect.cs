@@ -17,7 +17,9 @@ public abstract class Effect {
     protected abstract void RemoveFrom();
 
     public override bool Equals(object other) {
-        return this.id.Equals((other as Effect).id) ;
+        if(other == null) return false;
+        Effect effectOther = other as Effect;
+        return this.id.Equals(effectOther.id) && victim == effectOther.victim && causer == effectOther.causer;
     }
 
     public override int GetHashCode() {
@@ -29,10 +31,10 @@ public abstract class CountdownEffect : Effect {
     protected float effectDuration;
     protected Action onTimeOut;
 
-    protected float effectTimer;
+    protected float effectCountdown;
     protected CountdownEffect(CharacterBase victim, CharacterBase causer, float duration) : base(victim, causer) {
         effectDuration = duration;
-        effectTimer = duration;
+        effectCountdown = duration;
         onTimeOut += RemoveFrom;
     }
 
@@ -42,11 +44,11 @@ public abstract class CountdownEffect : Effect {
     }
 
     public virtual void AddTime(float time) {
-        effectTimer += time;
+        effectCountdown += time;
     }
 
     public virtual void Reset() {
-        effectTimer = effectDuration;
+        effectCountdown = effectDuration;
         UnityEngine.Debug.Log("Effect countdown reset" + id);
     }
 
@@ -55,8 +57,8 @@ public abstract class CountdownEffect : Effect {
     }
 
     public virtual void Update(float deltaTime) {
-        effectTimer -= deltaTime;
-        if (effectTimer <= 0) {
+        effectCountdown -= deltaTime;
+        if (effectCountdown <= 0) {
             if (onTimeOut != null) {
                 onTimeOut.Invoke();
             }

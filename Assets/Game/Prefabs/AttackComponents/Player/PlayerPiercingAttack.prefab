@@ -46,12 +46,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   firePoint: {fileID: 3092178165489617983}
   atkSpeed: 10
-  maxLevel: 4
   bullet: {fileID: 9009856565349146728, guid: c9ac67fdf2b682948b5a670a8bb761dc, type: 3}
   speedBullet: 8
   halfDistanceBase: 0.3
   distanceUpgradeX: 0.2
-  distanceUpgradeY: 0.03
+  distanceUpgradeY: 0.1
+  reduceDB: -0.1
 --- !u!1 &5804786507016261673
 GameObject:
   m_ObjectHideFlags: 0

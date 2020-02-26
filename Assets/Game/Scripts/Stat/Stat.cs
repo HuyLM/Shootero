@@ -7,21 +7,28 @@ using UnityEngine;
 [System.Serializable]
 public abstract class Stat<T> {
     public T BaseValue;
-    protected readonly List<StatModifier> statModifiers;
-    public readonly ReadOnlyCollection<StatModifier> StatModifiers;
+    [SerializeField] protected  List<StatModifier> statModifiers = new List<StatModifier>();
+    public List<StatModifier> StatModifiers { get => statModifiers; }
 
     private bool isDirty = true;
-    private T _value;
+    private T value;
     private T lastBaseValue;
 
     public Stat() {
         lastBaseValue = TMinValue();
         statModifiers = new List<StatModifier>();
-        StatModifiers = statModifiers.AsReadOnly();
     }
 
     public Stat(T baseValue) : this() {
         BaseValue = baseValue;
+    }
+
+    public Stat(Stat<T> stat) {
+        BaseValue = stat.BaseValue;
+        statModifiers = stat.statModifiers;
+        isDirty = stat.isDirty;
+        value = stat.value;
+        lastBaseValue = stat.lastBaseValue;
     }
 
 
@@ -29,10 +36,10 @@ public abstract class Stat<T> {
         get {
             if (isDirty || !lastBaseValue.Equals(BaseValue)) {
                 lastBaseValue = BaseValue;
-                _value = CalculateFinalValue();
+                value = CalculateFinalValue();
                 isDirty = false;
             }
-            return _value;
+            return value;
         }
     }
 

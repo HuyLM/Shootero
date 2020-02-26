@@ -4,4 +4,7 @@ using UnityEngine;
 
 public class PlayerStat : CharacterStat
 {
+    [SerializeField] private FloatStat atkSpeed;
+
+    public FloatStat AtkSpeed { get => atkSpeed; }
 }

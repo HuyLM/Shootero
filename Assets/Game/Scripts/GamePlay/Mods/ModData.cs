@@ -53,6 +53,14 @@ public abstract class ModInfor {
     protected int currentStack;
     public int CurrentStack { get => currentStack; }
 
+    public ModInfor() {
+        currentStack = 0;
+    }
+
+    public ModInfor(ModInfor mod) {
+        currentStack = mod.currentStack;
+    }
+
     public virtual void Upgrade() {
         currentStack++;
     }
@@ -67,12 +75,20 @@ public abstract class ModInfor {
     public abstract int GetId();
 }
 
-public interface IModable {
+public interface IModable : System.ICloneable {
     ModInfor GetModInfor();
 }
 
 public abstract class ModInfor<T> : ModInfor where T : ModData {
     protected T modData;
+
+    public ModInfor(T modData) {
+        this.modData = modData;
+    }
+
+    public ModInfor(ModInfor<T> mod) : base(mod) {
+        this.modData = mod.modData;
+    }
    
     public override sealed int GetId() {
         return modData.modId;

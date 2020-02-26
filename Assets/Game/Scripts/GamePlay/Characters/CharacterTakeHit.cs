@@ -18,7 +18,14 @@ public abstract class CharacterTakeHit : MonoBehaviour
 
     }
 
-    public void TakeHitDamege(int damage) {
+    public void TakeHitDamage(HitInfor hit) {
+        TakeHitDamage(hit.Damage.Value);
+        foreach(var effect in hit.Effects) {
+            effect.EffectTo(CharacterBase, hit.Causer, hit.Damage);
+        }
+    }
+
+    public void TakeHitDamage(int damage) {
         CharacterBase.HealtherBase.HPReduce(damage);
     }
 

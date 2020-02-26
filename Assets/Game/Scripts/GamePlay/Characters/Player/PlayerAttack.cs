@@ -7,6 +7,17 @@ public class PlayerAttack : CharacterAttack
     [SerializeField] private PlayerBasicComponent basicAttack;
 
     private PlayerAttackComponent currentAttackComponent;
+
+    private PlayerBase playerBase;
+    public PlayerBase PlayerBase {
+        get {
+            if(playerBase == null) {
+                playerBase = GetComponent<PlayerBase>();
+            }
+            return playerBase;
+        }
+    }
+
     public override void Initalize() {
         base.Initalize();
         ChangeAttackComponent(basicAttack);
@@ -21,6 +32,7 @@ public class PlayerAttack : CharacterAttack
 #endif
         }
         currentAttackComponent = Instantiate(newAttackComponent, transform);
+        currentAttackComponent.SetPlayerAttack(this);
         currentAttackComponent.Initalize();
     }
 

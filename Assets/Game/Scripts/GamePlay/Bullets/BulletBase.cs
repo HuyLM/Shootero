@@ -13,16 +13,17 @@ public abstract class BulletBase : MonoBehaviour
     [SerializeField, ColorUsage(true)] private Color selfDestroyColor;
     public Action onDestroy;
 
-    protected IntStat damage;
+    protected HitInfor hitInfor;
     protected FloatStat size;
     protected bool isHitted;
 
-    public IntStat Damage { get => damage; }
+    public HitInfor HitInfor { get => hitInfor; }
     public FloatStat Size { get => size; }
 
     protected virtual void OnEnable() {
         isHitted = false;
         GetComponent<Collider2D>().enabled = true;
+        size = new FloatStat(1.0f);
     }
 
     public void SetAlpha(float alpha) {
@@ -31,13 +32,22 @@ public abstract class BulletBase : MonoBehaviour
         sprite.color = color;
     }
 
-    public void SetDamage(int atk) {
-        damage = new IntStat((int)(atk * BDPercent));
+    public void SetHitInfor(int atk, List<IEffectAttackModable> effects, CharacterBase causer) {
+        int damage = (int)(atk * BDPercent);
+        hitInfor = new HitInfor(damage, effects, causer);
+    }
+
+    public virtual void SetHitInfor(BulletBase bullet) {
+        hitInfor = new HitInfor(bullet.hitInfor);
     }
 
     public void SetSize(float size)
     {
         this.size.BaseValue = size;
+        transform.localScale = Vector3.one * this.size.Value;
+    }
+
+    public void ChangeSize() {
         transform.localScale = Vector3.one * this.size.Value;
     }
 
@@ -65,7 +75,7 @@ public abstract class BulletBase : MonoBehaviour
         GetComponent<Collider2D>().enabled = false;
         CharacterTakeHit victim = collision.GetComponent<CharacterTakeHit>();
         if (victim != null) {
-            victim.TakeHitDamege(Damage.Value);
+            victim.TakeHitDamage(hitInfor);
         }
         DestroyWithEffect();
     }

@@ -70,6 +70,16 @@ public abstract class CharacterBase : MonoBehaviour {
         }
     }
 
+    private CharacterSkill skillerBase;
+    public CharacterSkill SkillerBase {
+        get {
+            if(skillerBase == null) {
+                skillerBase = GetComponent<CharacterSkill>();
+            }
+            return skillerBase;
+        }
+    }
+
     #endregion
 
     private void Awake() {
@@ -90,6 +100,7 @@ public abstract class CharacterBase : MonoBehaviour {
         HealtherBase.Countdown();
         StaterBase.Countdown();
         TakeHitterBase.Countdown();
+        SkillerBase.Countdown();
     }
 
     public abstract void Die();
