@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -14,19 +15,39 @@ public abstract class CharacterHealth : MonoBehaviour
         }
     }
 
-    [SerializeField] private int currentHP;
+    [SerializeField] protected int currentHP;
 
-    public int CurrentHp
+    protected Action<int> onHpChanged;
+
+    public virtual int CurrentHp
     {
-        get => currentHP;
+        get {
+            return currentHP;
+        }
+        protected set {
+            currentHP = value;
+            onHpChanged?.Invoke(currentHP);
+        }
+    }
+
+    public void AddOnHpChanged(Action<int> onHpChanged) {
+        this.onHpChanged += onHpChanged;
+    }
+
+    public void RemoveOnHpChanged(Action<int> onHpChanged) {
+        this.onHpChanged -= onHpChanged;
     }
 
     public void HPReduce(int hp) {
-        currentHP -= hp;
+        CurrentHp -= hp;
     }
 
     public void AddHp(int hp) {
-        currentHP += hp;
+        CurrentHp += hp;
+    }
+
+    public void ForceChangeCurrentHp(int hp) {
+        CurrentHp = hp;
     }
 
     public virtual void Initalize() {

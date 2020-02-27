@@ -4,8 +4,12 @@ using UnityEngine;
 
 public class E2Move : EnemyMove
 {
+    [SerializeField] protected AreaType randomArea;
     [SerializeField] private float attackMoveSpeed = 20;
-    private Vector2 targetMove;
+
+    protected Vector2 GetRandomInArea() {
+        return Helper.BorderHelper.GetPoinRandomInArea(randomArea);
+    }
 
     public override void StartMoveAppear()
     {
@@ -16,15 +20,7 @@ public class E2Move : EnemyMove
         myRigi.MoveRotation(Vector2.SignedAngle(Vector2.up, direction));
     }
 
-    public bool CompleteMoveToTarget()
-    {
-        if(targetMove == null)
-        {
-            return false;
-        }
-
-        return Vector2.Distance(targetMove, myRigi.position) < 0.01f * currentMoveSpeed;
-    }
+   
 
     public void SetTargetMoveAttack(Vector2 target)
     {

@@ -8,10 +8,10 @@ namespace Helper {
         private static List<EdgeBorder> GetListEdgeBorderSpawn(AreaType type, float offset) {
             int w = GamePlayConfig.borderW;
             int h = GamePlayConfig.borderH;
-            Vector2 topLeft = new Vector2(-(w / 2 + offset), h / 2 + offset);
-            Vector2 topRight = new Vector2((w / 2 + offset), h / 2 + offset);
-            Vector2 botLeft = new Vector2(-(w / 2 + offset), -(h / 2 + offset));
-            Vector2 botRight = new Vector2(w / 2 + offset, -(h / 2 + offset));
+            Vector2 topLeft = new Vector2(-(w / 2.0f + offset), h / 2.0f + offset);
+            Vector2 topRight = new Vector2((w / 2.0f + offset), h / 2.0f + offset);
+            Vector2 botLeft = new Vector2(-(w / 2.0f + offset), -(h / 2.0f + offset));
+            Vector2 botRight = new Vector2(w / 2.0f + offset, -(h / 2.0f + offset));
 
             List<EdgeBorder> edges = new List<EdgeBorder>();
             EdgeBorder top = new EdgeBorder(topLeft, topRight);
@@ -44,6 +44,9 @@ namespace Helper {
                     value = 0.75f;
                     break;
                 }
+                case AreaType.RandomTop: {
+                    return edges;
+                }
             }
 
             EdgeBorder left = new EdgeBorder();
@@ -61,6 +64,9 @@ namespace Helper {
         }
 
         public static Vector2 GetRandomPositionBorder(AreaType type, float offset = 1) {
+            if(type == AreaType.MidTop) {
+                return new Vector2(0, GamePlayConfig.borderH / 2.0f + offset);
+            }
             List<EdgeBorder> list = GetListEdgeBorderSpawn(type, offset);
             EdgeBorder edge = RandomHelper.RandomInList<EdgeBorder>(list);
             float lerpValue = Random.value;
@@ -131,5 +137,6 @@ namespace Helper {
 
 }
 public enum AreaType {
-    All = 0, OneHalf = 1, OneThirds = 2, TwoThirds = 3, OneQuarter = 4, ThreeQuarter = 5
+    All = 0, OneHalf = 1, OneThirds = 2, TwoThirds = 3, OneQuarter = 4, ThreeQuarter = 5,
+    MidTop = 6, RandomTop = 7
 }

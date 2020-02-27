@@ -2,15 +2,14 @@
 
 public abstract class EnemyMove : CharacterMove
 {
-    [SerializeField] protected AreaType randomArea;
+   
     [SerializeField] protected float appearMoveSpeed =5;
-    protected Vector2 direction;
     [SerializeField] protected float currentMoveSpeed;
     [SerializeField] private float speedRotate = 10f;
 
-    protected Vector2 GetRandomInArea() {
-        return Helper.BorderHelper.GetPoinRandomInArea(randomArea);
-    }
+    protected Vector2 targetMove;
+    protected Vector2 direction;
+
 
     public virtual void StartMoveAppear() {
 
@@ -48,5 +47,12 @@ public abstract class EnemyMove : CharacterMove
         LookDirection(target - MyRigi.position);
     }
 
-   
+    public bool CompleteMoveToTarget() {
+        if(targetMove == null) {
+            return false;
+        }
+
+        return Vector2.Distance(targetMove, myRigi.position) < 0.01f * currentMoveSpeed;
+    }
+
 }

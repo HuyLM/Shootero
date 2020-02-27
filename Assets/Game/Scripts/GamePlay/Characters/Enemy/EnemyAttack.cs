@@ -1,7 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
+﻿
 public abstract class EnemyAttack : CharacterAttack
 {
     private EnemyBase enemyBase;
@@ -11,7 +8,7 @@ public abstract class EnemyAttack : CharacterAttack
         {
             if(enemyBase == null)
             {
-                enemyBase = CharacterBase as EnemyBase;
+                enemyBase = GetComponent<EnemyBase>();
             }
             return enemyBase;
         }

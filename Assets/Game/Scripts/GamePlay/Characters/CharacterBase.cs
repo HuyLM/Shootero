@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -82,6 +83,16 @@ public abstract class CharacterBase : MonoBehaviour {
 
     #endregion
 
+    protected Action onDie;
+
+    public void AddOnDie(Action onDie) {
+        this.onDie += onDie;
+    }
+
+    public void RemoveOnDie(Action onDie) {
+        this.onDie -= onDie;
+    }
+
     private void Awake() {
         Initalize();
     }
@@ -92,6 +103,7 @@ public abstract class CharacterBase : MonoBehaviour {
         HealtherBase.Initalize();
         StaterBase.Initalize();
         TakeHitterBase.Initalize();
+        SkillerBase.Initalize();
     }
 
     public virtual void Countdown(){

@@ -7,6 +7,9 @@ public abstract class EnemyBase : CharacterBase
     [SerializeField] protected AreaType spawnBorderType;
     [SerializeField] protected float spawnBorderOffset = 1;
 
+    Vector2 positionSpawn;
+
+
     private EnemyAttack attackerEnemy;
     public EnemyAttack AttackerEnemy
     {
@@ -14,7 +17,7 @@ public abstract class EnemyBase : CharacterBase
         {
             if(attackerEnemy == null)
             {
-                attackerEnemy = AttackerBase as EnemyAttack;
+                attackerEnemy = GetComponent<EnemyAttack>();
             }
             return attackerEnemy;
         }
@@ -26,7 +29,7 @@ public abstract class EnemyBase : CharacterBase
         {
             if (moverEnemy == null)
             {
-                moverEnemy = MoverBase as EnemyMove;
+                moverEnemy = GetComponent<EnemyMove>();
             }
             return moverEnemy;
         }
@@ -38,7 +41,7 @@ public abstract class EnemyBase : CharacterBase
         {
             if (healtherEnemy == null)
             {
-                healtherEnemy = HealtherBase as EnemyHealth;
+                healtherEnemy = GetComponent<EnemyHealth>();
             }
             return healtherEnemy;
         }
@@ -51,7 +54,7 @@ public abstract class EnemyBase : CharacterBase
         {
             if (staterEnemy == null)
             {
-                staterEnemy = StaterBase as EnemyStat;
+                staterEnemy = GetComponent<EnemyStat>();
             }
             return staterEnemy;
         }
@@ -64,13 +67,23 @@ public abstract class EnemyBase : CharacterBase
         {
             if (takeHitterEnemy == null)
             {
-                takeHitterEnemy = TakeHitterBase as EnemyTakeHit;
+                takeHitterEnemy = GetComponent<EnemyTakeHit>();
             }
             return takeHitterEnemy;
         }
     }
 
-    Vector2 positionSpawn;
+    private EnemySkill skillerEnemy;
+    public EnemySkill SkillerEnemy {
+        get {
+            if(skillerEnemy == null) {
+                skillerEnemy = GetComponent<EnemySkill>();
+            }
+            return skillerEnemy;
+        }
+    }
+
+
     public void Spawn() {
         positionSpawn = Helper.BorderHelper.GetRandomPositionBorder(spawnBorderType, spawnBorderOffset);
         transform.position = positionSpawn;
@@ -78,6 +91,7 @@ public abstract class EnemyBase : CharacterBase
 
     public override void Die() {
         Debug.Log("die");
+        onDie?.Invoke();
     }
 
     public override void Destroy() {

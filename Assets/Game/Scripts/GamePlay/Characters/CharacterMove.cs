@@ -29,4 +29,5 @@ public abstract class CharacterMove : MonoBehaviour
     public virtual void Countdown() {
 
     }
+
 }

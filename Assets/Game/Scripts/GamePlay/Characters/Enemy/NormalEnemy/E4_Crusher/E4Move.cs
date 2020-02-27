@@ -4,11 +4,15 @@ using UnityEngine;
 
 public class E4Move : EnemyMove
 {
+    [SerializeField] protected AreaType randomArea;
     [SerializeField] private float attackMoveSpeed = 20;
     [SerializeField] private float rotateSpeedNormal = 1;
     [SerializeField] private float rotateSpeedAttack = 2;
-    private Vector2 targetMove;
     private float rotateSpeed;
+
+    protected Vector2 GetRandomInArea() {
+        return Helper.BorderHelper.GetPoinRandomInArea(randomArea);
+    }
 
     public override void StartMoveAppear()
     {
@@ -17,18 +21,6 @@ public class E4Move : EnemyMove
         targetMove = pointAppear;
         direction = (pointAppear - (Vector2)transform.position).normalized;
         myRigi.MoveRotation(Vector2.SignedAngle(Vector2.up, direction));
-    }
-
-    public bool CompleteMoveToTarget()
-    {
-        if (targetMove == null)
-        {
-            return false;
-        }
-        Debug.Log(Vector2.Distance(targetMove, transform.position));
-        Debug.Log(Vector2.Distance(targetMove, transform.position) < 0.01f * currentMoveSpeed);
-
-        return Vector2.Distance(targetMove, transform.position) < 0.01f * currentMoveSpeed;
     }
 
     public void SetTargetMoveAttack(Vector2 target)
