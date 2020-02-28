@@ -2,8 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class PlayerAttackComponent : MonoBehaviour
-{
+public abstract class PlayerAttackComponent : MonoBehaviour {
     [SerializeField] protected Transform firePoint;
     [SerializeField] protected float atkSpeed;
 
@@ -68,10 +67,10 @@ public abstract class PlayerAttackComponent : MonoBehaviour
 
         bulletChanged = PoolManager.Spawn(bullet);
         bulletChanged.SetHitInfor(playerAttack.PlayerBase.StaterPlayer.Atk.Value, playerAttack.PlayerBase.SkillerPlayer.EffectAttackMods, playerAttack.PlayerBase);
-        foreach(var mod in  playerAttack.PlayerBase.SkillerPlayer.ChangeBulletMods) {
+        foreach(var mod in playerAttack.PlayerBase.SkillerPlayer.ChangeBulletMods) {
             mod.ChangeBullet(bulletChanged.GetComponent<T>());
         }
-      
+
         return bulletChanged;
     }
 }

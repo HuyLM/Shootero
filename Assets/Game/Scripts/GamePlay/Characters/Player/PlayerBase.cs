@@ -7,7 +7,7 @@ public class PlayerBase : CharacterBase {
     private PlayerAttack attackerPlayer;
     public PlayerAttack AttackerPlayer {
         get {
-            if (attackerPlayer == null) {
+            if(attackerPlayer == null) {
                 attackerPlayer = GetComponent<PlayerAttack>();
             }
             return attackerPlayer;
@@ -17,7 +17,7 @@ public class PlayerBase : CharacterBase {
     private PlayerMove moverPlayer;
     public PlayerMove MoverPlayer {
         get {
-            if (moverPlayer == null) {
+            if(moverPlayer == null) {
                 moverPlayer = GetComponent<PlayerMove>();
             }
             return moverPlayer;
@@ -27,7 +27,7 @@ public class PlayerBase : CharacterBase {
     private PlayerHealth healtherPlayer;
     public PlayerHealth HealtherPlayer {
         get {
-            if (healtherPlayer == null) {
+            if(healtherPlayer == null) {
                 healtherPlayer = GetComponent<PlayerHealth>();
             }
             return healtherPlayer;
@@ -37,7 +37,7 @@ public class PlayerBase : CharacterBase {
     private PlayerStat staterPlayer;
     public PlayerStat StaterPlayer {
         get {
-            if (staterPlayer == null) {
+            if(staterPlayer == null) {
                 staterPlayer = GetComponent<PlayerStat>();
             }
             return staterPlayer;
@@ -47,7 +47,7 @@ public class PlayerBase : CharacterBase {
     private PlayerTakeHit takeHitterPlayer;
     public PlayerTakeHit TakeHitterPlayer {
         get {
-            if (takeHitterPlayer == null) {
+            if(takeHitterPlayer == null) {
                 takeHitterPlayer = GetComponent<PlayerTakeHit>();
             }
             return takeHitterPlayer;
@@ -55,16 +55,28 @@ public class PlayerBase : CharacterBase {
     }
 
 
-    private PlayerSkill skiller;
+    private PlayerSkill skillerPlayer;
     public PlayerSkill SkillerPlayer {
         get {
-            if (skiller == null) {
-                skiller = GetComponent<PlayerSkill>();
+            if(skillerPlayer == null) {
+                skillerPlayer = GetComponent<PlayerSkill>();
             }
-            return skiller;
+            return skillerPlayer;
+        }
+    }
+
+    private PlayerLevel levelerPlayer;
+    public PlayerLevel LevelerPlayer {
+        get {
+            if(levelerPlayer == null) {
+                levelerPlayer = GetComponent<PlayerLevel>();
+            }
+            return levelerPlayer;
         }
     }
     #endregion
+
+
 
     public override void Destroy() {
     }
