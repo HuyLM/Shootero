@@ -99,3 +99,8 @@ public abstract class EnemyBase : CharacterBase
     }
 
 }
+
+public enum EnemyType
+{
+    Normal, Elite, Champion
+}
