@@ -1,0 +1,39 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8acb447994285e74bad3b10e25d21121, type: 3}
+  m_Name: EnemyData
+  m_EditorClassIdentifier: 
+  enemies:
+  - enemies:
+    - {fileID: 9148641389066080441, guid: 84268099b9703964dac4bdece79e9e24, type: 3}
+    - {fileID: 9148641389066080441, guid: 93cd0c76c1ccd6e448f1c81a035f9014, type: 3}
+    - {fileID: 9148641389066080441, guid: 54d324399b049ee41a7956e6ee65287a, type: 3}
+  - enemies:
+    - {fileID: 5928951734424956650, guid: 8462c474957005d49aea83ce5f4fa68e, type: 3}
+    - {fileID: 5928951734424956650, guid: 0002f9d35918e2648ad3001cb55548eb, type: 3}
+    - {fileID: 5928951734424956650, guid: e8635c0918062044d92b0a0f63aaed3e, type: 3}
+  - enemies:
+    - {fileID: 5787272111806451947, guid: 4a8136d08c3cdc048899bc64704e32e4, type: 3}
+    - {fileID: 5787272111806451947, guid: f7722d27b6fbc7847b88a75ca7382ae3, type: 3}
+    - {fileID: 5787272111806451947, guid: b84994543198e444fb8c2159886c05ee, type: 3}
+  - enemies:
+    - {fileID: 3747659275528927003, guid: 88cf5d80a8d41724091da27b265918a6, type: 3}
+    - {fileID: 3747659275528927003, guid: 551d918c3d8c71644ad94122b273c69e, type: 3}
+    - {fileID: 3747659275528927003, guid: 52c0197b91110b4468daee0f7f40c435, type: 3}
+  - enemies:
+    - {fileID: 5769076690262643706, guid: 763030750664842428611ed01b2e19da, type: 3}
+    - {fileID: 5769076690262643706, guid: 2e99cba061a630448998c3cdf734b057, type: 3}
+    - {fileID: 5769076690262643706, guid: 74886936a8ac10c4eb25a58c619cb38a, type: 3}
+  - enemies:
+    - {fileID: 6615870019636491776, guid: 68df4d603524db247a905049f0ecfc3d, type: 3}
+    - {fileID: 6615870019636491776, guid: 7f3057a9ca4018846ac29ab36e7f507a, type: 3}
+    - {fileID: 6615870019636491776, guid: 0a8a21e5bb0ab394e8228ef49b3759ea, type: 3}

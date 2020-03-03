@@ -6,14 +6,13 @@ public class E6Attack : EnemyAttack {
     private E6Base e6Base;
     public E6Base E6Base {
         get {
-            if (e6Base == null) {
+            if(e6Base == null) {
                 e6Base = GetComponent<E6Base>();
             }
             return e6Base;
         }
     }
 
-    [SerializeField] private Transform target;
     [SerializeField] private float delayAttack;
     [SerializeField] private int numberShot;
     [SerializeField] private float deltaShot;
@@ -31,10 +30,10 @@ public class E6Attack : EnemyAttack {
 
     private IEnumerator Attacking() {
         yield return new WaitForSeconds(delayAttack);
-        for (int i = 0; i < numberShot; ++i) {
-            Vector2 directionShot = target.position - transform.position;
+        for(int i = 0; i < numberShot; ++i) {
+            Vector2 directionShot = Target.position - transform.position;
             HomingBullet centerBullet = Instantiate(bullet, transform.position, Quaternion.identity);
-            centerBullet.Shoot(speedBullet, target, directionShot);
+            centerBullet.Shoot(speedBullet, Target, directionShot);
             centerBullet.SetSize(size);
             yield return new WaitForSeconds(deltaShot);
         }
@@ -54,6 +53,6 @@ public class E6Attack : EnemyAttack {
     }
 
     public void AimTarget() {
-        E6Base.MoverE6.LookTarget(target.position);
+        E6Base.MoverE6.LookTarget(Target.position);
     }
 }

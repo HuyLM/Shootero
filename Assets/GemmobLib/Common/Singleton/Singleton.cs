@@ -7,7 +7,8 @@ public class Singleton<T> where T : new() {
 
     public static T Instance {
         get {
-            if (instance != null) return instance;
+            if(instance != null)
+                return instance;
             instance = new T();
             (instance as Singleton<T>).Initialize();
             return instance;
@@ -15,7 +16,8 @@ public class Singleton<T> where T : new() {
     }
 
     protected virtual void Initialize() {
-        if (initialized) return;
+        if(initialized)
+            return;
         initialized = true;
     }
 
@@ -26,10 +28,11 @@ public class Singleton<T> where T : new() {
 /** <summary> Base Singleton class which is MonoBehavior </summary> */
 public abstract class SingletonMono<T> : MonoBehaviour where T : Component {
     protected static T instance;
-    
+
     protected virtual void Awake() {
-        if (instance == null) instance = this as T;
-        else if (this != instance) {
+        if(instance == null)
+            instance = this as T;
+        else if(this != instance) {
             Debug.LogWarningFormat("[MonoSingleton] Class {0} is initialized multiple times", typeof(T).FullName);
             DestroyImmediate(gameObject);
             return;
@@ -54,9 +57,10 @@ public abstract class SingletonMono<T> : MonoBehaviour where T : Component {
 public class SingletonBind<T> : SingletonMono<T> where T : Component {
     public static T Instance {
         get {
-            if (instance != null) return instance;
+            if(instance != null)
+                return instance;
             instance = FindObjectOfType<T>();
-            if (instance == null) {
+            if(instance == null) {
                 Debug.LogErrorFormat("[Singleton] Class {0} must be added to scene before run!", typeof(T));
             }
             return instance;
@@ -85,16 +89,17 @@ public class SingletonBindAlive<T> : SingletonBind<T> where T : Component {
 public class SingletonFree<T> : SingletonMono<T> where T : Component {
     public static T Instance {
         get {
-            if (instance != null) return instance;
+            if(instance != null)
+                return instance;
             instance = (T)FindObjectOfType(typeof(T));
-            if (instance == null) {
+            if(instance == null) {
                 Debug.LogWarningFormat("[Singleton] Class {0} not found! Create empty instance", typeof(T));
                 instance = new GameObject(typeof(T).Name).AddComponent<T>();
             }
             return instance;
         }
     }
-    
+
     protected override void OnAwake() { }
 }
 
@@ -108,6 +113,8 @@ public class SingletonFreeAlive<T> : SingletonFree<T> where T : MonoBehaviour {
         DontDestroyOnLoad(gameObject);
         base.Awake();
     }
+
+    public static bool HasInstance => instance != null;
 }
 
 /** <summary> 
@@ -121,9 +128,11 @@ public class SingletonResources<T> : SingletonMono<T> where T : Component {
 
     public static T Instance {
         get {
-            if (instance != null) return instance;
+            if(instance != null)
+                return instance;
             instance = Instantiate(Resources.Load<GameObject>(PrefabPath)).GetComponent<T>();
-            if (instance == null) Debug.LogErrorFormat("[{0}] Wrong resources path: {1}!", typeof(T).Name, PrefabPath);
+            if(instance == null)
+                Debug.LogErrorFormat("[{0}] Wrong resources path: {1}!", typeof(T).Name, PrefabPath);
             return instance;
         }
     }

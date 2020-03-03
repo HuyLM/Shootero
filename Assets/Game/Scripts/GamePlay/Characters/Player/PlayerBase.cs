@@ -1,8 +1,10 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerBase : CharacterBase {
+
     #region References
     private PlayerAttack attackerPlayer;
     public PlayerAttack AttackerPlayer {
@@ -76,7 +78,23 @@ public class PlayerBase : CharacterBase {
     }
     #endregion
 
+    private Action<int> onChipChanged;
+    private int chipCollection;
 
+    public int ChipCollection { get => chipCollection; }
+
+    public void AddOnChipChanged(Action<int> onChipChanged) {
+        this.onChipChanged += onChipChanged;
+    }
+
+    public void RemoveOnChipChanged(Action<int> onChipChanged) {
+        this.onChipChanged -= onChipChanged;
+    }
+
+    public void AddChip(int chip) {
+        chipCollection += chip;
+        onChipChanged?.Invoke(chipCollection);
+    }
 
     public override void Destroy() {
     }

@@ -3,12 +3,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class CharacterHealth : MonoBehaviour
-{
+public abstract class CharacterHealth : MonoBehaviour {
     private CharacterBase characterBase;
     public CharacterBase CharacterBase {
         get {
-            if (characterBase == null) {
+            if(characterBase == null) {
                 characterBase = GetComponent<CharacterBase>();
             }
             return characterBase;
@@ -17,24 +16,23 @@ public abstract class CharacterHealth : MonoBehaviour
 
     [SerializeField] protected int currentHP;
 
-    protected Action<int> onHpChanged;
+    protected Action<int, float> onHpChanged;
 
-    public virtual int CurrentHp
-    {
+    public virtual int CurrentHp {
         get {
             return currentHP;
         }
         protected set {
             currentHP = value;
-            onHpChanged?.Invoke(currentHP);
+            onHpChanged?.Invoke(currentHP, 1.0f * currentHP / CharacterBase.StaterBase.MaxHP.Value);
         }
     }
 
-    public void AddOnHpChanged(Action<int> onHpChanged) {
+    public void AddOnHpChanged(Action<int, float> onHpChanged) {
         this.onHpChanged += onHpChanged;
     }
 
-    public void RemoveOnHpChanged(Action<int> onHpChanged) {
+    public void RemoveOnHpChanged(Action<int, float> onHpChanged) {
         this.onHpChanged -= onHpChanged;
     }
 

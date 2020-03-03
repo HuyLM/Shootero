@@ -1,0 +1,76 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bf596adea00845f41a63844bfd6b5382, type: 3}
+  m_Name: ConquerorData
+  m_EditorClassIdentifier: 
+  zones:
+  - waveDatas:
+    - difficult: 0
+      rangeTime:
+        min: 15
+        max: 20
+      rangeLimit:
+        min: 3
+        max: 4
+      enemyIds: 0100000002000000
+      difficultMultiplier: 1
+      rangeChip:
+        min: 50
+        max: 50
+    - difficult: 0
+      rangeTime:
+        min: 15
+        max: 20
+      rangeLimit:
+        min: 4
+        max: 6
+      enemyIds: 010000000200000003000000
+      difficultMultiplier: 1
+      rangeChip:
+        min: 50
+        max: 50
+    - difficult: 0
+      rangeTime:
+        min: 20
+        max: 25
+      rangeLimit:
+        min: 5
+        max: 7
+      enemyIds: 0200000003000000
+      difficultMultiplier: 1.1
+      rangeChip:
+        min: 50
+        max: 50
+    - difficult: 1
+      rangeTime:
+        min: 20
+        max: 25
+      rangeLimit:
+        min: 4
+        max: 6
+      enemyIds: 01000000
+      difficultMultiplier: 1.2
+      rangeChip:
+        min: 50
+        max: 50
+    - difficult: 0
+      rangeTime:
+        min: 0
+        max: 1
+      rangeLimit:
+        min: 1
+        max: 1
+      enemyIds: 00000000
+      difficultMultiplier: 1
+      rangeChip:
+        min: 0
+        max: 0

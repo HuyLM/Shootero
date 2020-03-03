@@ -74,7 +74,7 @@ public class BossBase : EnemyBase {
         }
     }
 
-    private void OnHpChanged(int hp) {
+    private void OnHpChanged(int hp, float pct) {
         UpdateHp();
     }
 

@@ -7,12 +7,9 @@ public abstract class CharacterBase : MonoBehaviour {
 
     #region References
     private CharacterAttack attacker;
-    public CharacterAttack AttackerBase
-    {
-        get
-        {
-            if(attacker == null)
-            {
+    public CharacterAttack AttackerBase {
+        get {
+            if(attacker == null) {
                 attacker = GetComponent<CharacterAttack>();
             }
             return attacker;
@@ -20,12 +17,9 @@ public abstract class CharacterBase : MonoBehaviour {
     }
 
     private CharacterMove mover;
-    public CharacterMove MoverBase
-    {
-        get
-        {
-            if (mover == null)
-            {
+    public CharacterMove MoverBase {
+        get {
+            if(mover == null) {
                 mover = GetComponent<CharacterMove>();
             }
             return mover;
@@ -33,12 +27,9 @@ public abstract class CharacterBase : MonoBehaviour {
     }
 
     private CharacterHealth healther;
-    public CharacterHealth HealtherBase
-    {
-        get
-        {
-            if (healther == null)
-            {
+    public CharacterHealth HealtherBase {
+        get {
+            if(healther == null) {
                 healther = GetComponent<CharacterHealth>();
             }
             return healther;
@@ -46,12 +37,9 @@ public abstract class CharacterBase : MonoBehaviour {
     }
 
     private CharacterStat stater;
-    public CharacterStat StaterBase
-    {
-        get
-        {
-            if (stater == null)
-            {
+    public CharacterStat StaterBase {
+        get {
+            if(stater == null) {
                 stater = GetComponent<CharacterStat>();
             }
             return stater;
@@ -59,12 +47,9 @@ public abstract class CharacterBase : MonoBehaviour {
     }
 
     private CharacterTakeHit takeHitter;
-    public CharacterTakeHit TakeHitterBase
-    {
-        get
-        {
-            if (takeHitter == null)
-            {
+    public CharacterTakeHit TakeHitterBase {
+        get {
+            if(takeHitter == null) {
                 takeHitter = GetComponent<CharacterTakeHit>();
             }
             return takeHitter;
@@ -93,10 +78,6 @@ public abstract class CharacterBase : MonoBehaviour {
         this.onDie -= onDie;
     }
 
-    private void Awake() {
-        Initalize();
-    }
-
     public virtual void Initalize() {
         AttackerBase.Initalize();
         MoverBase.Initalize();
@@ -106,7 +87,7 @@ public abstract class CharacterBase : MonoBehaviour {
         SkillerBase.Initalize();
     }
 
-    public virtual void Countdown(){
+    public virtual void Countdown() {
         AttackerBase.Countdown();
         MoverBase.Countdown();
         HealtherBase.Countdown();
@@ -118,8 +99,7 @@ public abstract class CharacterBase : MonoBehaviour {
     public abstract void Die();
     public abstract void Destroy();
 
-    public virtual bool IsDie()
-    {
+    public virtual bool IsDie() {
         return HealtherBase.CurrentHp <= 0;
     }
 }

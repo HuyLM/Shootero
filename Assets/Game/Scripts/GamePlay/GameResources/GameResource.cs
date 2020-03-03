@@ -20,7 +20,7 @@ public class GameResource : ScriptableObject {
     #endregion
 
     [SerializeField] private ConquerorData conquerorData;
+    [SerializeField] private EnemyData enemyData;
     public ConquerorData ConquerorData { get => conquerorData; }
-
-
+    public EnemyData EnemyData { get => enemyData; }
 }

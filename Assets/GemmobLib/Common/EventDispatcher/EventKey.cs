@@ -6,13 +6,9 @@ public enum EventKey {
     OnApplicationResume,
     #endregion
 
-    #region Currencies
-    OnCoinChanged,
-    OnGemChanged,
-    #endregion
-
-    #region State
-
+    #region IngameEvents
+    StartGame,
+    StartWave
     #endregion
 
 }

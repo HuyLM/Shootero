@@ -2,19 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class E3Attack : EnemyAttack
-{
+public class E3Attack : EnemyAttack {
     private E3Base e3Base;
     public E3Base E3Base {
         get {
-            if (e3Base == null) {
+            if(e3Base == null) {
                 e3Base = GetComponent<E3Base>();
             }
             return e3Base;
         }
     }
 
-    [SerializeField] private Transform target;
     [SerializeField] private float delayAttack;
     [SerializeField] private int numberShot;
     [SerializeField] private float deltaShot;
@@ -39,7 +37,7 @@ public class E3Attack : EnemyAttack
         yield return new WaitForSeconds(delayAttack);
         for(int i = 0; i < numberShot; ++i) {
             FrontBullet goLeft = Instantiate(bullet, transform.position, Quaternion.identity);
-            goLeft.Shoot(speedBullet, (Vector2)(target.position - transform.position)); 
+            goLeft.Shoot(speedBullet, (Vector2)(Target.position - transform.position));
             yield return new WaitForSeconds(deltaShot);
         }
 
@@ -56,12 +54,12 @@ public class E3Attack : EnemyAttack
 
     public override void Countdown() {
         base.Countdown();
-        if (attackCountdown >= 0) {
+        if(attackCountdown >= 0) {
             attackCountdown -= Time.deltaTime;
         }
     }
 
     public void AimTarget() {
-        E3Base.MoverE3.LookTarget(target.position);
+        E3Base.MoverE3.LookTarget(Target.position);
     }
 }

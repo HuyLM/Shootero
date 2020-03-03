@@ -14,7 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameState: 
   sceneGizmoColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
-  startActions: []
+  startActions:
+  - {fileID: 11400000, guid: bf61e9c2d9d97e645a9a6a01c38a6f0a, type: 2}
   updateActions: []
   endActions: []
   transitions: []

@@ -7,7 +7,7 @@ public class ChipDropController : ItemDropController {
     [SerializeField] private int chipNumber;
     public override void AddToPlayer(PlayerBase player) {
         player.LevelerPlayer.AddExp(chipNumber);
-        //player.AddChips(numberChip);
+        player.AddChip(chipNumber);
     }
 
     public override void Initalize() {

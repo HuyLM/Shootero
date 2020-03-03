@@ -6,14 +6,13 @@ public class E5Attack : EnemyAttack {
     private E5Base e5Base;
     public E5Base E5Base {
         get {
-            if (e5Base == null) {
+            if(e5Base == null) {
                 e5Base = GetComponent<E5Base>();
             }
             return e5Base;
         }
     }
 
-    [SerializeField] private Transform target;
     [SerializeField] private float delayAttack;
     [SerializeField] private int numberShot;
     [SerializeField] private float deltaShot;
@@ -32,11 +31,11 @@ public class E5Attack : EnemyAttack {
 
     private IEnumerator Attacking() {
         yield return new WaitForSeconds(delayAttack);
-        for (int i = 0; i < numberShot; ++i) {
-            Vector2 directionShot = target.position - transform.position;
+        for(int i = 0; i < numberShot; ++i) {
+            Vector2 directionShot = Target.position - transform.position;
             FrontBullet centerBullet = Instantiate(bullet, transform.position, Quaternion.identity);
             centerBullet.Shoot(speedBullet, directionShot);
-            for (int ibullet = 0; ibullet < numberBullet / 2; ++ibullet) {
+            for(int ibullet = 0; ibullet < numberBullet / 2; ++ibullet) {
                 Vector2 leftDirectionShot = Helper.GamePlayHelper.RotateDirection(directionShot, spreadAngle * (ibullet + 1));
                 FrontBullet leftBullet = Instantiate(bullet, transform.position, Quaternion.identity);
                 leftBullet.Shoot(speedBullet, leftDirectionShot);
@@ -65,6 +64,6 @@ public class E5Attack : EnemyAttack {
     }
 
     public void AimTarget() {
-        E5Base.MoverE5.LookTarget(target.position);
+        E5Base.MoverE5.LookTarget(Target.position);
     }
 }

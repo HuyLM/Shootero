@@ -147,7 +147,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetTypes: 01000000
-  BDPercent: 0
+  BDPercent: 1
   sprite: {fileID: 4793134904467596717}
   explosion: {fileID: 0}
   selfExplosion: {fileID: 0}

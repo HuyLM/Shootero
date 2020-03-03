@@ -4,67 +4,68 @@ using UnityEngine;
 using Helper;
 using System;
 
-public class GameLoader : MonoBehaviour
-{
+public class GameLoader : MonoBehaviour {
     [SerializeField] private PlayerBase player;
-    [SerializeField] private Vector3 positionSpawn;
-    private List<EnemyBase> enemies;
+    [SerializeField] private Vector3 positionSpawn = new Vector3(100, 100, 0);
+    [SerializeField] private Transform enemyContainer;
+    private List<EnemyBase> enemies = new List<EnemyBase>();
 
 
 
     public PlayerBase Player { get => player; }
     public List<EnemyBase> Enemies { get => enemies; }
 
-    public EnemyBase SpawnEnemy(DifficultWave difficult)
-    {
-        Tuple<EnemyType, int>[] randomType = new Tuple<EnemyType, int>[3];
-        switch(difficult)
-        {
-            case DifficultWave.Easy:
-                {
-                    randomType[0] = new Tuple<EnemyType, int>(EnemyType.Normal, 80);
-                    randomType[1] = new Tuple<EnemyType, int>(EnemyType.Elite, 20);
-                    randomType[2] = new Tuple<EnemyType, int>(EnemyType.Champion, 0);
-                    break;
-                }
-            case DifficultWave.Hard:
-                {
-                    randomType[0] = new Tuple<EnemyType, int>(EnemyType.Normal, 40);
-                    randomType[1] = new Tuple<EnemyType, int>(EnemyType.Elite, 40);
-                    randomType[2] = new Tuple<EnemyType, int>(EnemyType.Champion, 20);
-                    break;
-                }
-            case DifficultWave.Hell:
-                {
-                    randomType[0] = new Tuple<EnemyType, int>(EnemyType.Normal, 10);
-                    randomType[1] = new Tuple<EnemyType, int>(EnemyType.Elite, 50);
-                    randomType[2] = new Tuple<EnemyType, int>(EnemyType.Champion, 40);
-                    break;
-                }
-            default:
-                {
-                    break;
-                }
+    public void Initalize() {
+        player.Initalize();
+    }
+
+    public EnemyBase SpawnEnemy(DifficultWave difficult, int[] enemyIds) {
+        EnemyType type = RandomTypeEnemy(difficult);
+        EnemyBase enemy = GameResource.Instance.EnemyData.GetEnemyBaseRandom(enemyIds, type);
+        return SpawnEnemy(enemy);
+    }
+
+    public EnemyType RandomTypeEnemy(DifficultWave difficult) {
+        EnemyType[] types = { EnemyType.Normal, EnemyType.Elite, EnemyType.Champion };
+        int[] randomPercent = new int[3];
+        switch(difficult) {
+            case DifficultWave.Easy: {
+                randomPercent[0] = 80;
+                randomPercent[1] = 20;
+                randomPercent[2] = 0;
+                break;
+            }
+            case DifficultWave.Hard: {
+                randomPercent[0] = 40;
+                randomPercent[1] = 40;
+                randomPercent[2] = 20;
+                break;
+            }
+            case DifficultWave.Hell: {
+                randomPercent[0] = 10;
+                randomPercent[1] = 50;
+                randomPercent[2] = 40;
+                break;
+            }
+            default: {
+                break;
+            }
         }
-
-        
+        int randomTypeIndex = RandomHelper.RandomWithPercent(randomPercent);
+        return types[randomTypeIndex];
     }
 
-    private List<EnemyBase> GetAllEnemyType(EnemyType type)
-    {
 
-    }
-
-    public EnemyBase SpawnEnemy(EnemyBase enemy)
-    {
-        EnemyBase e = PoolManager.Spawn(enemy, transform, positionSpawn);
+    public EnemyBase SpawnEnemy(EnemyBase enemy) {
+        EnemyBase e = PoolManager.Spawn(enemy, enemyContainer, positionSpawn);
+        e.Initalize();
         enemies.Add(e);
         return e;
     }
 
-    public void RemoveEnemy(EnemyBase enemy)
-    {
+    public void RemoveEnemy(EnemyBase enemy) {
         enemies.Remove(enemy);
+        PoolManager.Recycle(enemy);
         GameManager.Instance.CalculationDelaySpawnEnemy();
     }
 
