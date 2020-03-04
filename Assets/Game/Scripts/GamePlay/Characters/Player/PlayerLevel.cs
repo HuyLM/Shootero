@@ -15,7 +15,7 @@ public class PlayerLevel : MonoBehaviour {
     }
     [SerializeField] private int currentLevel;
     [SerializeField] private int currentEXP;
-    [SerializeField] private int currentUpgradeLevel; 
+    [SerializeField] private int currentUpgradeLevel;
 
     private Action<int> onExpChanged;
     private Action<int> onLevelChanged;
@@ -24,6 +24,8 @@ public class PlayerLevel : MonoBehaviour {
     public int CurrentLevel { get => currentLevel; }
     public int CurrentEXP { get => currentEXP; }
     public int CurrentUpgradeLevel { get => currentUpgradeLevel; set => currentUpgradeLevel = value; }
+    public int UpgradePoint { get => (currentLevel - currentUpgradeLevel); }
+    public bool HasUpgradePoint { get => UpgradePoint > 0; }
 
     public int ExpNeedNextLevel() {
         int currentWave = 0;

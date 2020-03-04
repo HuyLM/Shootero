@@ -14,7 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   modId: 7
   type: 0
-  rarity: 0
+  nameMod: Burn Longer
+  icon: {fileID: 21300000, guid: 4ae11c772ecba8a4082c00f8eec0fe88, type: 3}
+  rarity: 2
   maxStack: 1
   requireMods:
   - {fileID: 11400000, guid: 80b8510b0074c884d970561e20af585c, type: 2}

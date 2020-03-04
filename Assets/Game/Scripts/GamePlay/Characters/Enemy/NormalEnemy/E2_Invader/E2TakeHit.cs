@@ -2,6 +2,5 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class E2TakeHit : EnemyTakeHit
-{
+public class E2TakeHit : EnemyTakeHit {
 }

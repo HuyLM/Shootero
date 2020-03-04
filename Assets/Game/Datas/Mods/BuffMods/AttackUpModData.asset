@@ -14,7 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   modId: 4
   type: 0
-  rarity: 0
+  nameMod: Attack Up
+  icon: {fileID: 21300000, guid: 24984667c085254499d9df5332e422ed, type: 3}
+  rarity: 1
   maxStack: 1
   requireMods: []
   aMods: []

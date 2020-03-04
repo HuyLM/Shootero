@@ -34,13 +34,15 @@ public class E3Attack : EnemyAttack {
     }
 
     private IEnumerator Attacking() {
+        FrontBullet bulletChanged = ChangeBullet<FrontBullet>(bullet);
         yield return new WaitForSeconds(delayAttack);
         for(int i = 0; i < numberShot; ++i) {
-            FrontBullet goLeft = Instantiate(bullet, transform.position, Quaternion.identity);
-            goLeft.Shoot(speedBullet, (Vector2)(Target.position - transform.position));
+            FrontBullet go = PoolManager.Spawn(bulletChanged, transform.position, Quaternion.identity);
+            go.SetHitInfor(bulletChanged);
+            go.Shoot(speedBullet, (Vector2)(Target.position - transform.position));
             yield return new WaitForSeconds(deltaShot);
         }
-
+        PoolManager.Recycle(bulletChanged);
         isAttacking = false;
     }
 

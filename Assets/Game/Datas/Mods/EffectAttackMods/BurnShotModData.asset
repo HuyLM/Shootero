@@ -14,7 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   modId: 3
   type: 0
-  rarity: 0
+  nameMod: Burn Shot
+  icon: {fileID: 21300000, guid: 55e30b4c1d847d84a968f2d33b00246e, type: 3}
+  rarity: 3
   maxStack: 1
   requireMods: []
   aMods: []

@@ -103,10 +103,12 @@ public class GameManager : SingletonBind<GameManager> {
 
     public void Pause() {
         Time.timeScale = 0;
+        currentGameState = GameState.Pause;
     }
 
     public void Resume() {
         Time.timeScale = 1;
+        currentGameState = GameState.Play;
     }
 
     private void CheckWinWave() {
@@ -119,6 +121,10 @@ public class GameManager : SingletonBind<GameManager> {
         yield return new WaitForSeconds(2f);
         bool isWin = CheckWinGame();
         if(!isWin) {
+            if(gameLoader.Player.LevelerPlayer.HasUpgradePoint) {
+                PopupHUD.Instance.Show<LevelupPopup>();
+            }
+            yield return new WaitUntil(() => currentGameState == GameState.Play);
             currentWaveIndex++;
             StartWave();
         }
@@ -143,14 +149,16 @@ public class GameManager : SingletonBind<GameManager> {
 
 
     private void Update() {
-        if(countdownSpawnTime >= 0) {
-            countdownSpawnTime -= Time.deltaTime;
-        }
+        if(currentGameState != GameState.Pause) {
+            if(countdownSpawnTime >= 0) {
+                countdownSpawnTime -= Time.deltaTime;
+            }
 
-        if(countdownSpawnEnemies >= 0) {
-            countdownSpawnEnemies -= Time.deltaTime;
-            if(countdownSpawnEnemies < 0) {
-                SpawnEnemies();
+            if(countdownSpawnEnemies >= 0) {
+                countdownSpawnEnemies -= Time.deltaTime;
+                if(countdownSpawnEnemies < 0) {
+                    SpawnEnemies();
+                }
             }
         }
     }

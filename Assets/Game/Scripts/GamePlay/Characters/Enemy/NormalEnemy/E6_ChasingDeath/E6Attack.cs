@@ -29,14 +29,17 @@ public class E6Attack : EnemyAttack {
     }
 
     private IEnumerator Attacking() {
+        HomingBullet bulletChanged = ChangeBullet<HomingBullet>(bullet);
         yield return new WaitForSeconds(delayAttack);
         for(int i = 0; i < numberShot; ++i) {
             Vector2 directionShot = Target.position - transform.position;
-            HomingBullet centerBullet = Instantiate(bullet, transform.position, Quaternion.identity);
+            HomingBullet centerBullet = PoolManager.Spawn(bulletChanged, transform.position, Quaternion.identity);
+            centerBullet.SetHitInfor(bulletChanged);
             centerBullet.Shoot(speedBullet, Target, directionShot);
             centerBullet.SetSize(size);
             yield return new WaitForSeconds(deltaShot);
         }
+        PoolManager.Recycle(bulletChanged);
         isAttacking = false;
     }
 

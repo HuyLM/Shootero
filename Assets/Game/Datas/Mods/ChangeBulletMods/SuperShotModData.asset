@@ -14,7 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   modId: 0
   type: 0
-  rarity: 0
+  nameMod: Super Shot
+  icon: {fileID: 21300000, guid: 63ca121333c01794784f488e2444a7fc, type: 3}
+  rarity: 2
   maxStack: 1
   requireMods: []
   aMods: []

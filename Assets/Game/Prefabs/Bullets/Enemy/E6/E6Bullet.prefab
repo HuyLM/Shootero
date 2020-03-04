@@ -162,7 +162,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70a3f472b87c9fd489a977b87b2804b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetTypes: 
+  targetTypes: 00000000
+  BDPercent: 1
+  sprite: {fileID: 0}
   explosion: {fileID: 0}
   selfExplosion: {fileID: 0}
   selfDestroyColor: {r: 0, g: 0, b: 0, a: 0}

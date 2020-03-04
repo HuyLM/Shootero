@@ -30,24 +30,27 @@ public class E5Attack : EnemyAttack {
     }
 
     private IEnumerator Attacking() {
+        FrontBullet bulletChanged = ChangeBullet<FrontBullet>(bullet);
         yield return new WaitForSeconds(delayAttack);
         for(int i = 0; i < numberShot; ++i) {
             Vector2 directionShot = Target.position - transform.position;
-            FrontBullet centerBullet = Instantiate(bullet, transform.position, Quaternion.identity);
+            FrontBullet centerBullet = PoolManager.Spawn(bulletChanged, transform.position, Quaternion.identity);
+            centerBullet.SetHitInfor(bulletChanged);
             centerBullet.Shoot(speedBullet, directionShot);
             for(int ibullet = 0; ibullet < numberBullet / 2; ++ibullet) {
                 Vector2 leftDirectionShot = Helper.GamePlayHelper.RotateDirection(directionShot, spreadAngle * (ibullet + 1));
-                FrontBullet leftBullet = Instantiate(bullet, transform.position, Quaternion.identity);
+                FrontBullet leftBullet = PoolManager.Spawn(bulletChanged, transform.position, Quaternion.identity);
+                leftBullet.SetHitInfor(bulletChanged);
                 leftBullet.Shoot(speedBullet, leftDirectionShot);
 
                 Vector2 rightDirectionShot = Helper.GamePlayHelper.RotateDirection(directionShot, -1 * spreadAngle * (ibullet + 1));
-                FrontBullet rightBullet = Instantiate(bullet, transform.position, Quaternion.identity);
+                FrontBullet rightBullet = PoolManager.Spawn(bulletChanged, transform.position, Quaternion.identity);
+                rightBullet.SetHitInfor(bulletChanged);
                 rightBullet.Shoot(speedBullet, rightDirectionShot);
             }
-
             yield return new WaitForSeconds(deltaShot);
         }
-
+        PoolManager.Recycle(bulletChanged);
         isAttacking = false;
     }
 

@@ -14,7 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   modId: 0
   type: 0
-  rarity: 0
+  nameMod: Hp Up
+  icon: {fileID: 21300000, guid: 4b48217ffa7cde9468e2614c95f53faa, type: 3}
+  rarity: 1
   maxStack: 1
   requireMods: []
   aMods: []

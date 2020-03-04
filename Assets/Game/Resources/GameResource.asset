@@ -14,3 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   conquerorData: {fileID: 11400000, guid: 659033f0f3e329345bdb5666d30e23df, type: 2}
   enemyData: {fileID: 11400000, guid: 77954cf0113a00546ac9cf9644311123, type: 2}
+  modGenerator: {fileID: 11400000, guid: b8857784764732d498ca7f672b90ffa1, type: 2}

@@ -100,5 +100,7 @@ public class PlayerBase : CharacterBase {
     }
 
     public override void Die() {
+        gameObject.SetActive(false);
+        GameManager.Instance.Lose();
     }
 }

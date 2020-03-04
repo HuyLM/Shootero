@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa2d7ccf5ac11be46b498d0869204995, type: 3}
+  m_Name: ModGenerator
+  m_EditorClassIdentifier: 
+  attackMods: []
+  allMods:
+  - {fileID: 11400000, guid: 1e088195f83410441b6bb78a46c50492, type: 2}
+  - {fileID: 11400000, guid: d0bbd2a05029c3e4db01816f9d7bb4e8, type: 2}
+  - {fileID: 11400000, guid: 98ccda8a46da0cd429630e95d6ecedce, type: 2}
+  - {fileID: 11400000, guid: 9f421a537518b844a97712cc28101ec4, type: 2}
+  - {fileID: 11400000, guid: 6db8032f1afdf974c826cb1ca02dea5f, type: 2}
+  - {fileID: 11400000, guid: 32b728362c2ff4444ae2acc49acd5002, type: 2}
+  - {fileID: 11400000, guid: 2a0248b0c7183054b8b3001647e9e04a, type: 2}
+  - {fileID: 11400000, guid: 670e347f662c4474a8ad1b3c8e470ec8, type: 2}
+  - {fileID: 11400000, guid: 80b8510b0074c884d970561e20af585c, type: 2}
+  slot:
+  - rarities: 01000000
+  - rarities: 0100000002000000
+  - rarities: 0200000003000000

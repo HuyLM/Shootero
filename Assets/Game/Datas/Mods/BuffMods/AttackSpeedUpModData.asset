@@ -14,7 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   modId: 5
   type: 0
-  rarity: 0
+  nameMod: Attack Speed Up
+  icon: {fileID: 21300000, guid: 4b4c9f14680f0fe4fb581f98c0d60e97, type: 3}
+  rarity: 1
   maxStack: 1
   requireMods: []
   aMods: []
