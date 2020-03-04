@@ -4,18 +4,78 @@ using UnityEngine;
 namespace Helper {
     public static class RandomHelper {
 
-        public static T RandomInList<T>(List<T> list) {
+        public static T RandomInCollection<T>(List<T> list) {
             if(list == null) {
                 return default(T);
             }
             return list[Random.Range(0, list.Count)];
         }
 
-        public static T RandomInArray<T>(T[] array) {
+        public static T RandomInCollection<T>(T[] array) {
             if(array == null) {
                 return default(T);
             }
             return array[Random.Range(0, array.Length)];
+        }
+
+        public static T[] RandomInCollection<T>(T[] array, int number, bool duplicate = false)
+        {
+            if(!duplicate && array.Length < number)
+            {
+                Logs.LogError("Can't Random Collection because out of range");
+                return null;
+            }
+            T[] result = new T[number];
+            List<int> indexs = new List<int>();
+            for(int i = 0; i < number; ++i)
+            {
+                int randomIndex = Random.Range(0, array.Length);
+                if(!duplicate)
+                {
+                    while(indexs.Contains(randomIndex))
+                    {
+                        randomIndex = Random.Range(0, array.Length);
+                    }
+                    indexs.Add(randomIndex);
+                }
+                else
+                {
+                    indexs.Add(randomIndex);
+                }
+                result[i] = array[randomIndex];
+            }
+
+            return result;
+        }
+
+        public static List<T> RandomInCollection<T>(List<T> list, int number, bool duplicate = false)
+        {
+            if (!duplicate && list.Count < number)
+            {
+                Logs.LogError("Can't Random Collection because out of range");
+                return null;
+            }
+            List<T> result = new List<T>();
+            List<int> indexs = new List<int>();
+            for (int i = 0; i < number; ++i)
+            {
+                int randomIndex = Random.Range(0, list.Count);
+                if (!duplicate)
+                {
+                    while (indexs.Contains(randomIndex))
+                    {
+                        randomIndex = Random.Range(0, list.Count);
+                    }
+                    indexs.Add(randomIndex);
+                }
+                else
+                {
+                    indexs.Add(randomIndex);
+                }
+                result.Add(list[randomIndex]);
+            }
+
+            return result;
         }
 
         public static bool RandomWithPercent(int value) {
@@ -54,6 +114,19 @@ namespace Helper {
                 T temp = list[k];
                 list[k] = list[n];
                 list[n] = temp;
+            }
+        }
+
+        public static void Shuffle<T>(T[] array)
+        {
+            int n = array.Length;
+            while (n > 1)
+            {
+                int k = Random.Range(0, n);
+                n--;
+                T temp = array[k];
+                array[k] = array[n];
+                array[n] = temp;
             }
         }
 

@@ -17,7 +17,7 @@ public class EnemyData : ScriptableObject {
 
     private EnemySpecies GetEnemySpeciesRandom(int[] indexs) {
         List<EnemySpecies> es = GetEnemySpeciesByIndex(indexs);
-        return RandomHelper.RandomInList(es);
+        return RandomHelper.RandomInCollection(es);
     }
 
     public EnemyBase GetEnemyBaseRandom(int[] indexs, EnemyType type) {
@@ -28,7 +28,7 @@ public class EnemyData : ScriptableObject {
                 enemyOnlyTypes.Add(enemyBase);
             }
         }
-        return RandomHelper.RandomInList(enemyOnlyTypes);
+        return RandomHelper.RandomInCollection(enemyOnlyTypes);
     }
 
     [System.Serializable]

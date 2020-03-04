@@ -21,6 +21,8 @@ public class GameResource : ScriptableObject {
 
     [SerializeField] private ConquerorData conquerorData;
     [SerializeField] private EnemyData enemyData;
+    [SerializeField] private ModGenerator modGenerator;
     public ConquerorData ConquerorData { get => conquerorData; }
     public EnemyData EnemyData { get => enemyData; }
+    public ModGenerator ModGenerator { get => modGenerator; }
 }

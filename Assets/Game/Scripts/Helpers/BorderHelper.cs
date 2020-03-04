@@ -68,7 +68,7 @@ namespace Helper {
                 return new Vector2(0, GamePlayConfig.borderH / 2.0f + offset);
             }
             List<EdgeBorder> list = GetListEdgeBorderSpawn(type, offset);
-            EdgeBorder edge = RandomHelper.RandomInList<EdgeBorder>(list);
+            EdgeBorder edge = RandomHelper.RandomInCollection<EdgeBorder>(list);
             float lerpValue = Random.value;
             return Vector2.Lerp(edge.begin, edge.end, lerpValue);
         }

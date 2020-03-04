@@ -4,7 +4,9 @@
 public abstract class ModData : ScriptableObject {
     public int modId;
     public ModType type;
-    [Range(0, 5)] public int rarity;
+    public string nameMod;
+    public Sprite icon;
+    public ModRarity rarity;
     public int maxStack = 1;
     public ModData[] requireMods;
     public ModData[] aMods;
@@ -99,5 +101,10 @@ public abstract class ModInfor<T> : ModInfor where T : ModData {
 
 public enum ModType {
     Offense, Deffense, Utility
+}
+
+public enum ModRarity
+{
+    Low = 1, Med = 2, High = 3
 }
 
